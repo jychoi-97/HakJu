@@ -31,14 +31,48 @@
                 <!-- 첫 번째 페이지. content1 -->
                 <LinearLayout
                     android:id="@+id/content1"
+                    android:background="@color/yellow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitCenter"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:layout_gravity="center"
+                        android:padding="8dp"
+                        android:src="@drawable/kimbap"
+                        android:adjustViewBounds="true"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitCenter"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:layout_gravity="center"
+                        android:padding="8dp"
+                        android:src="@drawable/ramyeon"
+                        android:adjustViewBounds="true"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitCenter"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:layout_gravity="right"
+                        android:padding="8dp"
+                        android:src="@drawable/bulgogi"
+                        android:adjustViewBounds="true"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="#8BC34A"
+                        android:background="@color/violet"
                         android:gravity="center"
                         android:padding="8dp"
                         android:text="TAB CONTENT 1" />
