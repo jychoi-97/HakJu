@@ -33,7 +33,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:text="결제완료"
         android:textSize="25sp"
         app:layout_constraintHorizontal_bias="0.5"
@@ -45,8 +45,8 @@
         android:id="@+id/imageView1"
         android:layout_width="130dp"
         android:layout_height="215dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/flying"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView1" />
@@ -71,6 +71,80 @@
         android:src="@drawable/smoke"
         app:layout_constraintLeft_toRightOf="@+id/imageView1"
         app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+    <TextView
+        android:id="@+id/myNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="348dp"
+        android:text="내 번호: "
+        android:textSize="25sp"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/myNumberData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="348dp"
+        android:textSize="25sp"
+        app:layout_constraintHorizontal_bias="0.341"
+        app:layout_constraintLeft_toRightOf="@+id/myNumber"
+
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="123" />
+
+
+    <TextView
+        android:id="@+id/waitingNumber1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="현재 내 앞에"
+        android:textSize="25sp"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myNumberData" />
+
+    <TextView
+        android:id="@+id/waitingNumberData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toRightOf="@+id/waitingNumber1"
+        app:layout_constraintTop_toBottomOf="@+id/myNumberData"
+        tools:text="22" />
+
+    <TextView
+        android:id="@+id/waitingNumber2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="20dp"
+        android:text="명의 대기인원"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toRightOf="@+id/waitingNumberData"
+        app:layout_constraintTop_toBottomOf="@+id/myNumberData" />
+
+    <Button
+        android:id="@+id/payCompleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="확인"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.894" />
+
+
 
 
 
