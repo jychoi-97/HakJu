@@ -2,10 +2,9 @@
 
 <translate
     xmlns:android = "http://schemas.android.com/apk/res/android"
-    android:fromXDelta="100"
+    android:fromXDelta="120"
     android:fromYDelta="0"
-    android:toXDelta="340"
+    android:toXDelta="318"
     android:repeatCount="infinite"
-
     android:interpolator="@anim/cycle_yeah"
     android:duration = "4000"/>

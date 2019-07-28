@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class OrderCompletionActivity extends AppCompatActivity {
 
@@ -16,6 +18,10 @@ public class OrderCompletionActivity extends AppCompatActivity {
         ImageView imageView1=findViewById(R.id.imageView1);
         Animation anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.translation);
         imageView1.startAnimation(anim);
+        RadioButton r_btn1, r_btn2, r_btn3;
+        RadioGroup radioGroup;
+
+
 
     }
 }
