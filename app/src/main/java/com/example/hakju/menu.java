@@ -108,10 +108,10 @@ public class menu extends AppCompatActivity {
             @Override
             public void onValueChange(NumberPicker picker, int oldValue, int newValue) {
                 productNum = picker.getValue();
-                total = productNum * total;
+                int totalPrice = productNum * total;
 
-                TextView totalPrice = (TextView)findViewById(R.id.totalPrice);
-                totalPrice.setText("총 금액: " + total);
+                TextView price = (TextView)findViewById(R.id.price);
+                price.setText("총 금액: " + totalPrice);
 
 //                Toast.makeText(menu.this, "Value:" + productNum + newValue, Toast.LENGTH_SHORT).show();
 //                Toast.makeText(menu.this, studentId, Toast.LENGTH_SHORT).show();
