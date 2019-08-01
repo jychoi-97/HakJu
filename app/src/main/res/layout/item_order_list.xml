@@ -5,33 +5,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/circleCircle"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="6dp"
-        android:src="@drawable/circle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+    <!--<ImageView-->
+        <!--android:id="@+id/circleCircle"-->
+        <!--android:layout_width="10dp"-->
+        <!--android:layout_height="10dp"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginTop="6dp"-->
+        <!--android:src="@drawable/circle"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.0" />-->
+
+    <CheckBox
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/cbSelect"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        />
+
+
     <TextView
         android:id="@+id/orderFoodName"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="6dp"
         android:layout_marginLeft="5dp"
-        app:layout_constraintLeft_toRightOf="@+id/circleCircle"
+        app:layout_constraintLeft_toRightOf="@+id/cbSelect"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="소금구이덮밥"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:ignore="UnknownId" />
 
     <TextView
 
         android:id="@+id/orderFoodNumber"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="6dp"
         android:layout_marginLeft="6dp"
         app:layout_constraintLeft_toRightOf="@+id/orderFoodName"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,12 +52,38 @@
 
     <TextView
         android:id="@+id/orderFoodGae"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="6dp"
 
         app:layout_constraintLeft_toRightOf="@+id/orderFoodNumber"
         app:layout_constraintTop_toTopOf="parent"
         android:text="개"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/orderFoodMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="7240원" />
+
+    <!--<ImageButton-->
+        <!--android:layout_marginTop="6dp"-->
+        <!--android:id="@+id/xButton"-->
+        <!--android:layout_width="19dp"-->
+        <!--android:layout_height="19dp"-->
+        <!--android:layout_constraintRight_toRightOf="parent"-->
+        <!--android:layout_constraintLeft_toRightOf="@+id/orderFoodMoneyOne"-->
+        <!--android:src="@drawable/ex"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/orderFoodMoneyOne"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
 
 </android.support.constraint.ConstraintLayout>
