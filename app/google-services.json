@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "422328148184",
+    "firebase_url": "https://hakjudatabase.firebaseio.com",
+    "project_id": "hakjudatabase",
+    "storage_bucket": "hakjudatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422328148184:android:cd5c0f2c0f1207df",
+        "android_client_info": {
+          "package_name": "com.example.hakju"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422328148184-v4vone3jjit82i3deotg76t9j7qlj2pm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hakju",
+            "certificate_hash": "7b8629828ebcc28add12ae903f1ee91b4e5e7104"
+          }
+        },
+        {
+          "client_id": "422328148184-toos2jake4cm367g302e5i86l1o917n3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkgpFrQqxumDLFJ63vIO9oZwwePd7e_nY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422328148184-toos2jake4cm367g302e5i86l1o917n3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
