@@ -6,4 +6,11 @@
         <item>라면</item>
         <item>불고기</item>
     </string-array>
+
+    <integer-array name="price">
+        <item>1500</item>
+        <item>2300</item>
+        <item>4800</item>
+    </integer-array>
+
 </resources>

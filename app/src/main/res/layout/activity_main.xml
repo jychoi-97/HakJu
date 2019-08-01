@@ -11,18 +11,19 @@
     <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="아영, 지은 안녕" />
+    android:text="학번을 입력하세요:" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="ex)20171998"
+
+        android:id="@+id/studentId"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="장바구니"
-        android:id="@+id/toCart"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="menu"
-        android:id="@+id/mn"/>
+        android:text="확인"
+        android:id="@+id/toMenu"/>
 
 </LinearLayout>
