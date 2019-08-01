@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.ValueCallback;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -32,15 +33,20 @@ public class menu extends AppCompatActivity {
 //    DatabaseReference mRootRef = firebaseDatabase.getReference();
 
 
-
+    String studentId;
     String productName;
     int productNum;
+    int total;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+
+        Intent intent = getIntent();
+        studentId = intent.getExtras().getString("StudentID");
 //        database.child("user").child("123").setValue("1");
 
         TabHost tabHost1 = (TabHost) findViewById(R.id.tabHost1) ;
@@ -65,10 +71,24 @@ public class menu extends AppCompatActivity {
         tabHost1.addTab(ts3) ;
 
         final Spinner spinnerMenu1 = (Spinner)findViewById(R.id.spinnerMenu1);
+
+        final int[] arrayTotal = getResources().getIntArray(R.array.price);
+
+
         spinnerMenu1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 productName = spinnerMenu1.getSelectedItem().toString();
+                if(position == 1)
+                    total = arrayTotal[0];
+
+                else if (position == 2)
+                    total = arrayTotal[1];
+
+                else if (position == 3)
+                    total = arrayTotal[2];
+
+
 //                Toast.makeText(menu.this, "item:" + spinnerMenu1.getSelectedItem().toString() + productName, Toast.LENGTH_SHORT).show();
             }
 
@@ -79,8 +99,8 @@ public class menu extends AppCompatActivity {
 
         final NumberPicker menu1num = (NumberPicker)findViewById(R.id.menu1num);
         menu1num.setMaxValue(20);
-        menu1num.setMinValue(1);
-        menu1num.setValue(1);
+        menu1num.setMinValue(0);
+        menu1num.setValue(0);
         menu1num.setWrapSelectorWheel(false);
 
 
@@ -88,14 +108,25 @@ public class menu extends AppCompatActivity {
             @Override
             public void onValueChange(NumberPicker picker, int oldValue, int newValue) {
                 productNum = picker.getValue();
+                total = productNum * total;
+
+                TextView totalPrice = (TextView)findViewById(R.id.totalPrice);
+                totalPrice.setText("총 금액: " + total);
 
 //                Toast.makeText(menu.this, "Value:" + productNum + newValue, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(menu.this, studentId, Toast.LENGTH_SHORT).show();
 
             }
         });
 
 
+
         mRootRef = FirebaseDatabase.getInstance().getReference();
+
+
+
+
+
 
         Button btnCart = (Button)findViewById(R.id.btnCart);
 
@@ -108,8 +139,7 @@ public class menu extends AppCompatActivity {
 //                productNumRef.child("productNum").push().setValue(productNum);
 
 
-
-                writeMenu("1234", productName, productNum);
+                writeMenu(studentId, productName, productNum, total);
 
                 Intent intent = new Intent(getApplicationContext(), cart.class);
                 startActivity(intent);
@@ -129,10 +159,10 @@ public class menu extends AppCompatActivity {
 
     }
 
-    private void writeMenu(String userId, String productName, int productNum){
-        MenuData menuData = new MenuData(productName, productNum);
+    private void writeMenu(String studentId, String productName, int productNum, int total){
+        MenuData menuData = new MenuData(productName, productNum, total);
 
-        mRootRef.child("장바구니").child(userId).setValue(menuData);
+        mRootRef.child("장바구니").child(studentId).push().setValue(menuData);
     }
 
 
