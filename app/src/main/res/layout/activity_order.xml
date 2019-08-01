@@ -67,28 +67,32 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
+        android:marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text3">
 
         <RadioButton
+            android:marginLeft="20dp"
             android:id="@+id/rg_btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="휴대폰 결제" />
 
         <RadioButton
+            android:layout_marginLeft="20dp"
             android:id="@+id/rg_btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="신용카드" />
 
         <RadioButton
+            android:layout_marginLeft="20dp"
             android:id="@+id/rg_btn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,6 +101,15 @@
     </RadioGroup>
 
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderButton"
+        android:layout_marginRight="184dp"
+        android:layout_marginBottom="52dp"
+        android:text="결제"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
 
