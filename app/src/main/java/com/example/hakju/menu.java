@@ -97,8 +97,8 @@ public class menu extends AppCompatActivity {
                 productNum = picker.getValue();
                 int totalPrice = productNum * total;
 
-                TextView price = (TextView)findViewById(R.id.price);
-                price.setText("총 금액: " + totalPrice);
+                TextView tprice = (TextView)findViewById(R.id.tprice);
+                tprice.setText("총 금액: " + totalPrice);
 
             }
         });
