@@ -131,7 +131,9 @@ public class menu extends AppCompatActivity {
             public void onClick(View view) {
                 writeMenu(studentId, productName, productNum, total);
 
+
                 Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
+                intent.putExtra("StudentID", studentId);
                 startActivity(intent);
             }
         });
