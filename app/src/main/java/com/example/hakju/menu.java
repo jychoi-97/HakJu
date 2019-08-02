@@ -98,7 +98,7 @@ public class menu extends AppCompatActivity {
                 int totalPrice = productNum * total;
 
                 TextView tprice = (TextView)findViewById(R.id.tprice);
-                tprice.setText("총 금액: " + totalPrice);
+                tprice.setText("총 금액: " + totalPrice + "원");
 
             }
         });
@@ -112,7 +112,7 @@ public class menu extends AppCompatActivity {
             public void onClick(View view) {
                 writeMenu(studentId, productName, productNum, total);
 
-                Intent intent = new Intent(getApplicationContext(), cart.class);
+                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
                 startActivity(intent);
             }
         });
@@ -122,7 +122,7 @@ public class menu extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
+                Intent intent = new Intent(getApplicationContext(), cart.class);
                 startActivity(intent);
 
             }
