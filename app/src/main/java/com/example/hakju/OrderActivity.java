@@ -1,6 +1,7 @@
 package com.example.hakju;
 
 import android.content.Context;
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -49,7 +50,7 @@ import static java.security.AccessController.getContext;
 
 //
 public class OrderActivity extends AppCompatActivity {
-    public ListAdapter adapter;
+//    public ListAdapter adapter;
     public FirebaseDatabase database;
 
 //    public FirebaseListAdapter firebaseListAdapter;
@@ -57,61 +58,62 @@ public class OrderActivity extends AppCompatActivity {
 
     //데이터베이스의 정보
     public DatabaseReference ref;
+    String studentId;
 
     //정보 담을 객체
-    public List<MenuData> menuList = new ArrayList<>();
+//    public List<OrderItem> orderList = new ArrayList<>();
 
     //화면에 뿌려줄 뷰
-    public ListView listView;
-    public class ListAdapter extends BaseAdapter{
-        @Override
-        public void notifyDataSetChanged() {
-            super.notifyDataSetChanged();
-        }
-
-        List<MenuData> menuList;
-        Context context;
-        LayoutInflater inflater;
-
-        public ListAdapter(List<MenuData> menuList, Context context){
-            this.menuList = menuList;
-            this.context = context;
-            this.inflater = (LayoutInflater) context. getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getCount() {
-            return menuList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return menuList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int i, View convertView, ViewGroup viewGroup) {
-            if(convertView == null){
-                convertView = inflater.inflate(R.layout.item_order_list, null);
-            }
-
-            TextView foodName = (TextView)convertView.findViewById(R.id.orderFoodName);
-            TextView foodNumber = (TextView)convertView.findViewById(R.id.orderFoodNumber);
-            TextView foodMoney = (TextView)convertView.findViewById(R.id.orderFoodMoney);
-
-            MenuData menuData = menuList.get(i);
-            foodName.setText(menuData.productName);
-            foodNumber.setText(menuData.productNum);
-            foodMoney.setText(menuData.total);
-
-            return convertView;
-        }
-    }
+//    public ListView listView;
+//    public class ListAdapter extends BaseAdapter{
+//        @Override
+//        public void notifyDataSetChanged() {
+//            super.notifyDataSetChanged();
+//        }
+//
+//        List<OrderItem> orderList;
+//        Context context;
+//        LayoutInflater inflater;
+//
+//        public ListAdapter(List<OrderItem> orderList, Context context){
+//            this.orderList = orderList;
+//            this.context = context;
+//            this.inflater = (LayoutInflater) context. getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        }
+//
+//        @Override
+//        public int getCount() {
+//            return orderList.size();
+//        }
+//
+//        @Override
+//        public Object getItem(int position) {
+//            return orderList.get(position);
+//        }
+//
+//        @Override
+//        public long getItemId(int position) {
+//            return position;
+//        }
+//
+//        @Override
+//        public View getView(int i, View convertView, ViewGroup viewGroup) {
+//            if(convertView == null){
+//                convertView = inflater.inflate(R.layout.activity_order, null);
+//            }
+//
+//            TextView foodName = (TextView)convertView.findViewById(R.id.orderFoodName);
+//            TextView foodNumber = (TextView)convertView.findViewById(R.id.orderFoodNumber);
+//            TextView foodMoney = (TextView)convertView.findViewById(R.id.orderFoodMoney);
+//
+//            OrderItem orderItem = orderList.get(i);
+//            foodName.setText(orderItem.getFoodNumber());
+//            foodNumber.setText(orderItem.getFoodNumber());
+//            foodMoney.setText(orderItem.getFoodMoney());
+//
+//            return convertView;
+//        }
+//    }
 
 
 
@@ -122,6 +124,14 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+        Intent intent = getIntent();
+        studentId = intent.getExtras().getString("StudentID");
+        final ArrayList<String> midList = new ArrayList<>();
+        ListView listView = (ListView) findViewById(R.id.listView);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, midList);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listView.setAdapter(adapter);
+
 
 
 
@@ -132,43 +142,36 @@ public class OrderActivity extends AppCompatActivity {
         // 파이어 베이스에서 레퍼런스를 가져옴
         ref = database.getReference("장바구니");
 
-        listView = (ListView) findViewById(R.id.listView);
-        adapter = new ListAdapter(menuList, this);
+
+//        adapter = new ListAdapter(orderList, this);
 
                 // 파이어베이스 에서 데이터를 가져 옴
 
 
-                ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // 부모가 User 인데 부모 그대로 가져오면 User 각각의 데이터 이니까 자식으로 가져와서 담아줌
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+        ref.child(studentId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // 부모가 User 인데 부모 그대로 가져오면 User 각각의 데이터 이니까 자식으로 가져와서 담아줌
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                            MenuData menuData = snapshot.getValue(MenuData.class);
-//                    menuData.studentId = snapshot.getKey();
-                            Log.i("id", menuData.studentId);
-                            Log.i("MenuName", menuData.getProductName());
-                            Log.i("MenuNumber", String.valueOf(menuData.getProductNum()));
-                            Log.i("Total", String.valueOf(menuData.getTotal()));
+                    String name = snapshot.child("productName").getValue(String.class);
+                    int total = snapshot.child("total").getValue(Integer.class);
+                    int number = snapshot.child("productNum").getValue(Integer.class);
 
-                            menuList.add(menuData);
+                    Log.i("MenuName", name);
+//                           Log.i("MenuNumber", number);
+//                           Log.i("Total", total);
+                    midList.add(name + " "+ number +"개      "+total+"원");
+                    //어뎁터한테 데이터 넣어줬다고 알려줌 (안하면 화면에 안나온다)
+                    adapter.notifyDataSetChanged();
+                }
 
-                        }
-
-
-                        //어뎁터한테 데이터 넣어줬다고 알려줌 (안하면 화면에 안나온다)
-                        adapter.notifyDataSetChanged();
-
-
-                    }
-
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w("OrderActivity", "loadPost:onCancelled", databaseError.toException());
-                    }
-
-                });
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("OrderActivity", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
 
         // 4. 리스트뷰에 목록 세팅
 
