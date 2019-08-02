@@ -13,15 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public EditText editText;
-//    public String studentId;
-//    SharedPreferences pref;
-//    SharedPreferences.Editor editor;
-
-
-
-
-
+    EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,53 +21,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         editText = findViewById(R.id.studentId);
-//        pref = getSharedPreferences("pref", MODE_PRIVATE);
-//        editor= pref.edit();
-
-//        sp = getSharedPreferences("shared", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sp.edit();
-//        editor.putString("data", editText.getText().toString());
-//        editor.commit();
-
-//        studentId = editText.getText().toString();
 
         Button button1 = (Button) findViewById(R.id.toMenu);
         button1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-//                editor.putString("userID", editText.getText().toString());
-//                editor.commit();
-                Toast.makeText(MainActivity.this, editText.getText().toString(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), menu.class);
-                intent.putExtra("StudentID", editText.getText().toString());
-                startActivity(intent);
 
+                if(editText.getText().toString().length() == 8) {
+//                    Toast.makeText(MainActivity.this, editText.getText().toString(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    intent.putExtra("StudentID", editText.getText().toString());
+                    startActivity(intent);
+                }
+
+                else
+                    Toast.makeText(MainActivity.this, "학번을 다시 입력하세요!", Toast.LENGTH_SHORT).show();
 
             }
+
         });
 
     }
-//    private void getPreferences(){
-//        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-//        pref.getString("hi", "");
-//        String a = pref.getString("key1", "");
-//        Toast.makeText(this, a, Toast.LENGTH_LONG).show();
-//
-//
-//    }
-
-
-
-//
-//    private void savePreferences(){
-//
-//        editor.putString("userID", editText.getText().toString());
-//        editor.commit();
-//    }
-
-
-
-
-
 
 }

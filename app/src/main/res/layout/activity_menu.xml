@@ -20,7 +20,8 @@
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@color/violet"/>
 
             <!-- FrameLayout의 id값이 반드시 "tabcontent"로 지정되어야 함. -->
             <FrameLayout
@@ -34,40 +35,41 @@
                     android:id="@+id/content1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/yellow"
-                    android:orientation="horizontal">
+                    android:background="#FFFFFF"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/item1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:adjustViewBounds="true"
                         android:background="@drawable/kimbap"
                         android:padding="8dp"
-                        android:text="김밥" />
+                        android:scaleType="fitEnd"
+                        android:text="야채김밥\n1500원" />
 
                     <TextView
                         android:id="@+id/item2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:adjustViewBounds="true"
                         android:background="@drawable/ramyeon"
                         android:padding="8dp"
-                        android:scaleType="fitCenter"
-                        android:text="라면" />
+                        android:scaleType="fitEnd"
+                        android:text="라면\n2300원" />
 
-                    <ImageButton
+                    <TextView
                         android:id="@+id/item3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"
                         android:layout_weight="1"
                         android:adjustViewBounds="true"
                         android:padding="8dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/bulgogi" />
+                        android:scaleType="fitEnd"
+                        android:background="@drawable/bulgogi"
+                        android:text="뚝배기불고기\n4800원"/>
 
                 </LinearLayout>
 
@@ -77,15 +79,41 @@
                     android:id="@+id/content2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/item4"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="#009688"
-                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
                         android:padding="8dp"
-                        android:text="TAB CONTENT 2" />
+                        android:scaleType="fitEnd"
+                        android:background="@drawable/sogumgui"
+                        android:text="소금구이덮밥\n3500원"/>
+
+                    <TextView
+                        android:id="@+id/item5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:padding="8dp"
+                        android:scaleType="fitEnd"
+                        android:background="@drawable/bibimbab"
+                        android:text="육회비빔밥\n4500원"/>
+
+                    <TextView
+                        android:id="@+id/item6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:padding="8dp"
+                        android:scaleType="fitEnd"
+                        android:background="@drawable/tunamayo"
+                        android:text="참치마요\n3500원"/>
 
                 </LinearLayout>
 
@@ -94,22 +122,49 @@
                     android:id="@+id/content3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/item7"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="#2196F3"
-                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
                         android:padding="8dp"
-                        android:text="TAB CONTENT 3" />
+                        android:scaleType="fitEnd"
+                        android:background="@drawable/omelett"
+                        android:text="오므라이스\n2800원"/>
+
+                    <TextView
+                        android:id="@+id/item8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:padding="8dp"
+                        android:scaleType="fitEnd"
+                        android:background="@drawable/donkatse"
+                        android:text="등심돈까스\n3800원"/>
+
+                    <TextView
+                        android:id="@+id/item9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:padding="8dp"
+                        android:scaleType="fitEnd"
+                        android:background="@drawable/soddeok"
+                        android:text="소떡소떡\n3000원"/>
 
                     </LinearLayout>
                 </FrameLayout>
             </LinearLayout>
         </TabHost>
 
-//안되면 slidinglayer 등 대체품 찾아야함
+
+
     <SlidingDrawer
         android:layout_width="match_parent"
         android:layout_height="match_parent"

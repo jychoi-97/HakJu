@@ -78,6 +78,25 @@ public class menu extends AppCompatActivity {
 
                 else if (position == 3)
                     total = arrayTotal[2];
+
+                else if (position == 4)
+                    total = arrayTotal[3];
+
+                else if (position == 5)
+                    total = arrayTotal[4];
+
+                else if (position == 6)
+                    total = arrayTotal[5];
+
+                else if (position == 7)
+                    total = arrayTotal[6];
+
+                else if (position == 8)
+                    total = arrayTotal[7];
+
+                else if (position == 9)
+                    total = arrayTotal[8];
+
             }
 
             @Override
