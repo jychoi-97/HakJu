@@ -52,6 +52,7 @@ import static java.security.AccessController.getContext;
 public class OrderActivity extends AppCompatActivity {
 //    public ListAdapter adapter;
     public FirebaseDatabase database;
+    Button allSelected;
 
 //    public FirebaseListAdapter firebaseListAdapter;
 
@@ -124,10 +125,11 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+        allSelected = (Button)findViewById(R.id.allSelected);
         Intent intent = getIntent();
         studentId = intent.getExtras().getString("StudentID");
         final ArrayList<String> midList = new ArrayList<>();
-        ListView listView = (ListView) findViewById(R.id.listView);
+        final ListView listView = (ListView) findViewById(R.id.listView);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, midList);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
@@ -173,7 +175,19 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
-        // 4. 리스트뷰에 목록 세팅
+        allSelected.setOnClickListener(new Button.OnClickListener(){
+            public void onClick(View v){
+                int count = 0;
+                count = adapter.getCount();
+                for(int i=0; i<count;i++){
+                    listView.setItemChecked(i, true);
+                }
+
+            }
+        });
+
+
+
 
 
 

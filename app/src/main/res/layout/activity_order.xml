@@ -107,16 +107,26 @@
 
     </RadioGroup>
 
-
     <Button
+        android:id="@+id/allSelected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+
+        android:text="전체 선택"
+        app:layout_constraintRight_toLeftOf="@+id/orderButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <Button
         android:id="@+id/orderButton"
-        android:layout_marginRight="184dp"
-        android:layout_marginBottom="52dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginRight="16dp"
         android:text="결제"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 
 
