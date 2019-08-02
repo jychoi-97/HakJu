@@ -112,7 +112,7 @@ public class menu extends AppCompatActivity {
             public void onClick(View view) {
                 writeMenu(studentId, productName, productNum, total);
 
-                Intent intent = new Intent(getApplicationContext(), cart.class);
+                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
                 startActivity(intent);
             }
         });
@@ -122,7 +122,7 @@ public class menu extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
+                Intent intent = new Intent(getApplicationContext(), cart.class);
                 startActivity(intent);
 
             }
