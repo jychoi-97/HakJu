@@ -30,7 +30,7 @@
 
     <TextView
         android:id="@+id/orderFoodName"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="7dp"
         android:layout_marginLeft="5dp"
         app:layout_constraintLeft_toRightOf="@+id/cbSelect"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,7 +42,7 @@
     <TextView
 
         android:id="@+id/orderFoodNumber"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="7dp"
         android:layout_marginLeft="6dp"
         app:layout_constraintLeft_toRightOf="@+id/orderFoodName"
         app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +52,7 @@
 
     <TextView
         android:id="@+id/orderFoodGae"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="7dp"
 
         app:layout_constraintLeft_toRightOf="@+id/orderFoodNumber"
         app:layout_constraintTop_toTopOf="parent"
@@ -65,7 +65,7 @@
         android:id="@+id/orderFoodMoney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="7dp"
         android:layout_marginRight="56dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -75,15 +75,16 @@
         app:layout_constraintVertical_bias="1.0"
         tools:text="7240원" />
 
-    <!--<ImageButton-->
-        <!--android:layout_marginTop="6dp"-->
-        <!--android:id="@+id/xButton"-->
-        <!--android:layout_width="19dp"-->
-        <!--android:layout_height="19dp"-->
-        <!--android:layout_constraintRight_toRightOf="parent"-->
-        <!--android:layout_constraintLeft_toRightOf="@+id/orderFoodMoneyOne"-->
-        <!--android:src="@drawable/ex"-->
-        <!--app:layout_constraintLeft_toRightOf="@+id/orderFoodMoneyOne"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
+    <ImageButton
+        android:id="@+id/xButton"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="20dp"
+
+        android:layout_marginTop="7dp"
+        android:src="@drawable/ex"
+        app:layout_constraintLeft_toRightOf="@+id/orderFoodMoney"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
