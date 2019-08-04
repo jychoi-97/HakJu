@@ -15,6 +15,7 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -132,7 +133,7 @@ int number;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
-        allSelected = (Button)findViewById(R.id.allSelected);
+        allSelected = (Button) findViewById(R.id.allSelected);
         Intent intent = getIntent();
         studentId = intent.getExtras().getString("StudentID");
         final ArrayList<String> midList = new ArrayList<>();
@@ -154,7 +155,7 @@ int number;
 
 //        adapter = new ListAdapter(orderList, this);
 
-                // 파이어베이스 에서 데이터를 가져 옴
+        // 파이어베이스 에서 데이터를 가져 옴
 
 
 
@@ -219,29 +220,13 @@ int number;
                 int count = 0;
                 count = adapter.getCount();
                 for (int i = 0; i < count; i++) {
-                    if(listView.isItemChecked(i) == true){
-                        String name = midList.get(i);
-                        ref1.child(studentId).push().setValue(name);
-//                        if(int i=0; i<)
-//                        StringTokenizer st = new StringTokenizer(midList.get(i));
-//
-//                        writeOrderItem(name, total, number, true);
-                    }
+                    if(listView.isItemChecked(i) == true)
+                        writeOrderItem(name, total, number, true);
                 }
             }
         });
-//        orderButton.setOnClickListener(new Button.OnClickListener() {
-//            public void onClick(View v) {
-//                int count;
-//                count = adapter.getCount();
-//
-//                // 아이템 추가.
-////                items.add("LIST" + Integer.toString(count + 1));
-//
-//                // listview 갱신
-//                adapter.notifyDataSetChanged();
-//            }
-//        }) ;
+
+
     }
 
     public void writeOrderItem(String foodName, int foodNumber, int foodMoney, boolean isSelected){

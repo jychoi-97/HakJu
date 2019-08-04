@@ -18,6 +18,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <!--<android.support.v7.widget.RecyclerView-->
         <!--android:layout_marginLeft="27dp"-->
         <!--android:layout_marginRight="27dp"-->
@@ -106,6 +108,8 @@
             android:text="카카오페이" />
 
     </RadioGroup>
+
+
 
     <Button
         android:id="@+id/allSelected"

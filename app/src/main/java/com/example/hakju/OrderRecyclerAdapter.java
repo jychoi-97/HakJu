@@ -55,6 +55,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
             foodNumber = itemView.findViewById(R.id.orderFoodNumber);
             foodNumberMoney = itemView.findViewById(R.id.orderFoodMoney);
         }
+
     }
     public List<OrderItem> getOrderItemList(){
         return mOrderFoodList;

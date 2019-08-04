@@ -75,16 +75,16 @@
         app:layout_constraintVertical_bias="1.0"
         tools:text="7240원" />
 
-    <ImageButton
-        android:id="@+id/xButton"
-        android:layout_width="19dp"
-        android:layout_height="19dp"
+    <!--<ImageButton-->
+        <!--android:id="@+id/xButton"-->
+        <!--android:layout_width="19dp"-->
+        <!--android:layout_height="19dp"-->
+        <!--android:layout_constraintRight_toRightOf="parent"-->
+        <!--android:layout_marginLeft="20dp"-->
 
-        android:layout_marginLeft="20dp"
-
-        android:layout_marginTop="7dp"
-        android:src="@drawable/ex"
-        app:layout_constraintLeft_toRightOf="@+id/orderFoodMoney"
-        app:layout_constraintTop_toTopOf="parent" />
+        <!--android:layout_marginTop="7dp"-->
+        <!--android:src="@drawable/ex"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/orderFoodMoney"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
 
 </android.support.constraint.ConstraintLayout>
