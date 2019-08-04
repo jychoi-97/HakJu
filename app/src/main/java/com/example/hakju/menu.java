@@ -32,6 +32,7 @@ public class menu extends AppCompatActivity {
     String productName;
     int productNum;
     int total;
+    int totalPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +115,7 @@ public class menu extends AppCompatActivity {
             @Override
             public void onValueChange(NumberPicker picker, int oldValue, int newValue) {
                 productNum = picker.getValue();
-                int totalPrice = productNum * total;
+                totalPrice = productNum * total;
 
                 TextView tprice = (TextView)findViewById(R.id.tprice);
                 tprice.setText("총 금액: " + totalPrice + "원");
@@ -129,7 +130,7 @@ public class menu extends AppCompatActivity {
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                writeMenu(studentId, productName, productNum, total);
+                writeMenu(studentId, productName, productNum, totalPrice);
 
 
                 Intent intent = new Intent(getApplicationContext(), OrderActivity.class);

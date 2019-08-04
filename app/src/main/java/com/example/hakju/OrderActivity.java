@@ -49,10 +49,11 @@ import java.util.List;
 import static java.security.AccessController.getContext;
 
 //
-public class OrderActivity extends AppCompatActivity {
+public class  OrderActivity extends AppCompatActivity {
 //    public ListAdapter adapter;
     public FirebaseDatabase database;
     Button allSelected;
+    Button orderButton;
 
 //    public FirebaseListAdapter firebaseListAdapter;
 
@@ -60,6 +61,7 @@ public class OrderActivity extends AppCompatActivity {
     //데이터베이스의 정보
     public DatabaseReference ref;
     String studentId;
+    public DatabaseReference ref1;
 
     //정보 담을 객체
 //    public List<OrderItem> orderList = new ArrayList<>();
@@ -117,7 +119,9 @@ public class OrderActivity extends AppCompatActivity {
 //    }
 
 
-
+String name;
+int total;
+int number;
 
 
 
@@ -133,7 +137,7 @@ public class OrderActivity extends AppCompatActivity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, midList);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
-
+        orderButton = (Button)findViewById(R.id.orderButton);
 
 
 
@@ -143,7 +147,7 @@ public class OrderActivity extends AppCompatActivity {
 
         // 파이어 베이스에서 레퍼런스를 가져옴
         ref = database.getReference("장바구니");
-
+        ref1 = database.getReference("결제");
 
 //        adapter = new ListAdapter(orderList, this);
 
@@ -156,9 +160,9 @@ public class OrderActivity extends AppCompatActivity {
                 // 부모가 User 인데 부모 그대로 가져오면 User 각각의 데이터 이니까 자식으로 가져와서 담아줌
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    String name = snapshot.child("productName").getValue(String.class);
-                    int total = snapshot.child("total").getValue(Integer.class);
-                    int number = snapshot.child("productNum").getValue(Integer.class);
+                    name = snapshot.child("productName").getValue(String.class);
+                    total = snapshot.child("total").getValue(Integer.class);
+                    number = snapshot.child("productNum").getValue(Integer.class);
 
                     Log.i("MenuName", name);
 //                           Log.i("MenuNumber", number);
@@ -186,95 +190,26 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
-
-
-
+        orderButton.setOnClickListener(new Button.OnClickListener(){
+            public void onClick(View v) {
+                int count = 0;
+                count = adapter.getCount();
+                for (int i = 0; i < count; i++) {
+                    if(listView.isItemChecked(i) == true)
+                        writeOrderItem(name, total, number, true);
+                }
+            }
+        });
 
 
     }
+
+    public void writeOrderItem(String foodName, int foodNumber, int foodMoney, boolean isSelected){
+        OrderItem orderItem = new OrderItem(foodName, foodNumber, foodMoney, isSelected);
+
+        ref1.child(studentId).push().setValue(orderItem);
+    }
 }
-//
-//
-//    private FirebaseRecyclerAdapter<OrderItem, OrderRecyclerAdapter.ViewHolder> mFirebaseAdapter;
-//    OrderRecyclerAdapter adapter;
-//    private DatabaseReference mFirebaseDatabaseReference;
-//
-//
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_order);
-//
-//        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-//
-//        Button btnSelection;
-//
-//        RecyclerView orderRecyclerView = findViewById(R.id.recycler1);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-//        orderRecyclerView.setLayoutManager(layoutManager);
-//
-//        btnSelection = (Button) findViewById(R.id.orderButton);
-//        List<OrderItem> orderDataList = new ArrayList<>();
-//        for(int i=0; i<10; i++){
-//            orderDataList.add(new OrderItem(i+"음식", i, i,true));
-//        }
-//        adapter = new OrderRecyclerAdapter(orderDataList);
-//        orderRecyclerView.setAdapter(adapter);
-//
-//        btnSelection.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String data = "";
-//                List<OrderItem> stList = adapter.getOrderItemList();
-//
-//                for(int i=0; i< stList.size(); i++){
-//                    OrderItem singleOrder = stList.get(i);
-//                    if(singleOrder.isSelected()){
-//                        data = data + "Wn" +singleOrder.getFoodName();
-//                    }
-//                }
-//                Toast.makeText(OrderActivity.this, data, Toast.LENGTH_LONG).show();
-//            }
-//        });
-//        Query query = mFirebaseDatabaseReference.child("장바구니");
-//        FirebaseRecyclerOptions<OrderItem> options = new FirebaseRecyclerOptions.Builder<OrderItem>()
-//                .setQuery(query, OrderItem.class)
-//                .build();
-//
-//        mFirebaseAdapter = new FirebaseRecyclerAdapter<OrderItem, OrderRecyclerAdapter.ViewHolder>(options) {
-//            @Override
-//            protected void onBindViewHolder(@NonNull OrderRecyclerAdapter.ViewHolder holder, int position, @NonNull OrderItem model) {
-//                holder.foodName.setText(model.getFoodName());
-//                holder.foodNumberMoney.setText(model.getFoodMoney());
-//                holder.foodNumber.setText(model.getFoodNumber());
-//            }
-//
-//            @NonNull
-//            @Override
-//            public OrderRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//                View view = LayoutInflater.from(parent.getContext())
-//                        .inflate(R.layout.item_order_list, parent, false);
-//                return new OrderRecyclerAdapter.ViewHolder(view);
-//            }
-//        };
-//
-//        orderRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        orderRecyclerView.setAdapter(mFirebaseAdapter);
-//    }
-//
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        mFirebaseAdapter.startListening();
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        mFirebaseAdapter.stopListening();
-//    }
-//}
 
 
 

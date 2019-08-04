@@ -9,7 +9,7 @@ public class OrderItem {
     private boolean isSelected;
     private int foodMoney;
 
-    public OrderItem(String foodName, int foodNumber, int footMoney, boolean isSelected) {
+    public OrderItem(String foodName, int foodNumber, int foodMoney, boolean isSelected) {
         this.foodName = foodName;
         this.foodNumber = foodNumber;
         this.foodMoney = foodMoney;
