@@ -1,4 +1,6 @@
 package com.example.hakju;
+import java.util.StringTokenizer;
+
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,6 +157,7 @@ int number;
                 // 파이어베이스 에서 데이터를 가져 옴
 
 
+
         ref.child(studentId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -167,7 +171,7 @@ int number;
                     Log.i("MenuName", name);
 //                           Log.i("MenuNumber", number);
 //                           Log.i("Total", total);
-                    midList.add(name + " "+ number +"개      "+total+"원");
+                    midList.add(name + "  "+ number +"개      "+total+"원");
                     //어뎁터한테 데이터 넣어줬다고 알려줌 (안하면 화면에 안나온다)
                     adapter.notifyDataSetChanged();
                 }
@@ -190,18 +194,54 @@ int number;
             }
         });
 
+        orderButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+                int count = adapter.getCount() ;
+
+                for (int i = count-1; i >= 0; i--) {
+                    if (checkedItems.get(i)) {
+//                        writeLala(midList.get(i));
+//                        ref1.child(studentId).push().setValue(order);
+                    }
+                }
+
+                // 모든 선택 상태 초기화.
+                listView.clearChoices() ;
+
+                adapter.notifyDataSetChanged();
+            }
+        }) ;
+
+
         orderButton.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v) {
                 int count = 0;
                 count = adapter.getCount();
                 for (int i = 0; i < count; i++) {
-                    if(listView.isItemChecked(i) == true)
-                        writeOrderItem(name, total, number, true);
+                    if(listView.isItemChecked(i) == true){
+                        String name = midList.get(i);
+                        ref1.child(studentId).push().setValue(name);
+//                        if(int i=0; i<)
+//                        StringTokenizer st = new StringTokenizer(midList.get(i));
+//
+//                        writeOrderItem(name, total, number, true);
+                    }
                 }
             }
         });
-
-
+//        orderButton.setOnClickListener(new Button.OnClickListener() {
+//            public void onClick(View v) {
+//                int count;
+//                count = adapter.getCount();
+//
+//                // 아이템 추가.
+////                items.add("LIST" + Integer.toString(count + 1));
+//
+//                // listview 갱신
+//                adapter.notifyDataSetChanged();
+//            }
+//        }) ;
     }
 
     public void writeOrderItem(String foodName, int foodNumber, int foodMoney, boolean isSelected){
@@ -209,8 +249,28 @@ int number;
 
         ref1.child(studentId).push().setValue(orderItem);
     }
+
+    public void writeLala(String name){
+        Lala lala = new Lala(name);
+
+        ref1.child(studentId).push().setValue(name);
+    }
 }
 
+class Lala {
+    String name;
 
+    public Lala(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
 
 
