@@ -56,6 +56,7 @@ import static java.security.AccessController.getContext;
 public class  OrderActivity extends AppCompatActivity {
 //    public ListAdapter adapter;
     public FirebaseDatabase database;
+    TextView chong;
     Button allSelected;
     Button orderButton;
 
@@ -133,12 +134,17 @@ int number;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+        chong = (TextView) findViewById(R.id.text2);
+
         allSelected = (Button) findViewById(R.id.allSelected);
         Intent intent = getIntent();
         studentId = intent.getExtras().getString("StudentID");
         final ArrayList<String> midList = new ArrayList<>();
+
+        final ArrayList<Integer> moneyList = new ArrayList<>();
         final ListView listView = (ListView) findViewById(R.id.listView);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, midList);
+
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
         orderButton = (Button)findViewById(R.id.orderButton);
@@ -169,6 +175,7 @@ int number;
                     total = snapshot.child("total").getValue(Integer.class);
                     number = snapshot.child("productNum").getValue(Integer.class);
 
+                    moneyList.add(total);
                     Log.i("MenuName", name);
 //                           Log.i("MenuNumber", number);
 //                           Log.i("Total", total);
@@ -195,33 +202,55 @@ int number;
             }
         });
 
-        orderButton.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-                int count = adapter.getCount() ;
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//                ref.child(studentId).d
+//
+//
+//
+//            }
+//        });
 
-                for (int i = count-1; i >= 0; i--) {
-                    if (checkedItems.get(i)) {
-//                        writeLala(midList.get(i));
-//                        ref1.child(studentId).push().setValue(order);
-                    }
-                }
 
-                // 모든 선택 상태 초기화.
-                listView.clearChoices() ;
 
-                adapter.notifyDataSetChanged();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+//                int countCount = 0;
+//                int totalTotal = 0;
+//                countCount = adapter.getCount();
+//                for (int i=0; i<countCount; i++){
+//                    if(listView.isItemChecked(i) == true){
+//                        totalTotal+=moneyList.get(i);
+//                    }
+//                }
+                chong.setText("dd");
             }
-        }) ;
+        });
+
+
+
 
 
         orderButton.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v) {
                 int count = 0;
+                int totalTotal = 0;
                 count = adapter.getCount();
                 for (int i = 0; i < count; i++) {
-                    if(listView.isItemChecked(i) == true)
-                        writeOrderItem(name, total, number, true);
+
+                    if(listView.isItemChecked(i) == true){
+
+                        String name = midList.get(i);
+                        ref1.child(studentId).push().setValue(name);
+
+//                        if(int i=0; i<)
+//                        StringTokenizer st = new StringTokenizer(midList.get(i));
+//
+//                        writeOrderItem(name, total, number, true);
+                    }
                 }
             }
         });
