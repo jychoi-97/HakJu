@@ -59,12 +59,14 @@ public class  OrderActivity extends AppCompatActivity {
     Button orderButton;
     Button removeButton;
 
-    String s;
+    String key;
 
     //데이터베이스의 정보
     public DatabaseReference ref;
     String studentId;
     public DatabaseReference ref1;
+    DatabaseReference ref3;
+
 
     String name;
     int total;
@@ -135,21 +137,6 @@ public class  OrderActivity extends AppCompatActivity {
 
 
 
-        ref1.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                long count = dataSnapshot.getChildrenCount();
-                s = String.valueOf(count+1);
-
-
-
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("OrderActivity", "loadPost:onCancelled", databaseError.toException());
-            }
-        });
 
 
         allSelected.setOnClickListener(new Button.OnClickListener(){
@@ -199,29 +186,30 @@ public class  OrderActivity extends AppCompatActivity {
 
 
 
+
         orderButton.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v) {
 
                 int count = 0;
                 int totalTotal = 0;
                 count = adapter.getCount();
+                ref3=ref1.push();
 
                 for (int i = 0; i < count; i++) {
 
                     if(listView.isItemChecked(i) == true ){
 
-                        String name = midList.get(i);
-                        ref1.child(s).child(studentId).push().setValue(name);
+
+                            String name = midList.get(i);
+                            ref1.child(ref3.getKey()).child(studentId).push().setValue(name);
 
 
-//                        if(int i=0; i<)
-//                        StringTokenizer st = new StringTokenizer(midList.get(i));
-//
-//                        writeOrderItem(name, total, number, true);
                     }
+
                 }
                 Intent intent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
                 intent.putExtra("StudentID", studentId);
+                intent.putExtra("key", ref3.getKey());
 
                 startActivity(intent);
             }

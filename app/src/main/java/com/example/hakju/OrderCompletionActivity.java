@@ -19,16 +19,22 @@ import com.google.firebase.database.ValueEventListener;
 
 public class OrderCompletionActivity extends AppCompatActivity {
 
+//    Intent intent = getIntent();
     public FirebaseDatabase database;
     public DatabaseReference ref2;
+//    int keyNumber = intent.getExtras().getInt("key");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_completion);
-
         Intent intent = getIntent();
+        String name = intent.getExtras().getString("key"); /*String형*/
 
-        String studentId = intent.getExtras().getString("StudentID");
+
+
+
+
+//        String studentId = intent.getExtras().getString("StudentID");
         database = FirebaseDatabase.getInstance();
         ref2 = database.getReference("결제");
         ImageView imageView1=findViewById(R.id.imageView1);
@@ -37,7 +43,7 @@ public class OrderCompletionActivity extends AppCompatActivity {
         final TextView myNumber = findViewById(R.id.myNumberData);
         final TextView waitingNumber = findViewById(R.id.waitingNumberData);
 
-        myNumber.setText("1");
+        myNumber.setText(name.substring(name.length()-6, name.length()));
 
 
         ref2.addListenerForSingleValueEvent(new ValueEventListener() {
