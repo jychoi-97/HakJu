@@ -59,6 +59,8 @@ public class  OrderActivity extends AppCompatActivity {
     Button orderButton;
     Button removeButton;
 
+    String s;
+
     //데이터베이스의 정보
     public DatabaseReference ref;
     String studentId;
@@ -67,21 +69,26 @@ public class  OrderActivity extends AppCompatActivity {
     String name;
     int total;
     int number;
+    int waitingNumber;
 
+    int chongCount = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         chong = (TextView) findViewById(R.id.text2);
 
+
         allSelected = (Button) findViewById(R.id.allSelected);
         Intent intent = getIntent();
         studentId = intent.getExtras().getString("StudentID");
         final ArrayList<String> midList = new ArrayList<>();
 
+
         final ArrayList<Integer> moneyList = new ArrayList<>();
         final ListView listView = (ListView) findViewById(R.id.listView);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, midList);
+
 
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
@@ -105,6 +112,7 @@ public class  OrderActivity extends AppCompatActivity {
                 // 부모가 User 인데 부모 그대로 가져오면 User 각각의 데이터 이니까 자식으로 가져와서 담아줌
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
+
                     name = snapshot.child("productName").getValue(String.class);
                     total = snapshot.child("total").getValue(Integer.class);
                     number = snapshot.child("productNum").getValue(Integer.class);
@@ -125,6 +133,23 @@ public class  OrderActivity extends AppCompatActivity {
             }
         });
 
+
+
+        ref1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long count = dataSnapshot.getChildrenCount();
+                s = String.valueOf(count+1);
+
+
+
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("OrderActivity", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
 
 
         allSelected.setOnClickListener(new Button.OnClickListener(){
@@ -176,15 +201,18 @@ public class  OrderActivity extends AppCompatActivity {
 
         orderButton.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v) {
+
                 int count = 0;
                 int totalTotal = 0;
                 count = adapter.getCount();
+
                 for (int i = 0; i < count; i++) {
 
-                    if(listView.isItemChecked(i) == true){
+                    if(listView.isItemChecked(i) == true ){
 
                         String name = midList.get(i);
-                        ref1.child(studentId).push().setValue(name);
+                        ref1.child(s).child(studentId).push().setValue(name);
+
 
 //                        if(int i=0; i<)
 //                        StringTokenizer st = new StringTokenizer(midList.get(i));
@@ -192,6 +220,10 @@ public class  OrderActivity extends AppCompatActivity {
 //                        writeOrderItem(name, total, number, true);
                     }
                 }
+                Intent intent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+                intent.putExtra("StudentID", studentId);
+
+                startActivity(intent);
             }
         });
 
