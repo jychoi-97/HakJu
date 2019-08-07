@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import kr.co.bootpay.Bootpay;
 import kr.co.bootpay.BootpayAnalytics;
+import kr.co.bootpay.BootpayWebView;
 import kr.co.bootpay.enums.Method;
 import kr.co.bootpay.enums.PG;
 import kr.co.bootpay.enums.UX;
@@ -36,8 +37,8 @@ import kr.co.bootpay.model.BootUser;
 
 public class cart extends AppCompatActivity {
     private int stuck = 10;
-    Button button;
-    kr.co.bootpay.BootpayWebView wv;
+//    Button button;
+    BootpayWebView wv;
 
 
 
@@ -45,11 +46,8 @@ public class cart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-
-        wv = (kr.co.bootpay.BootpayWebView)findViewById(R.id.webview);
-
         BootpayAnalytics.init(this, "5d4465cb4f74b4002b051f8c");
-        onClick_request(wv);
+        onClick_request(this.wv);
     }
 
     public void onClick_request(View v) {

@@ -1,7 +1,9 @@
 package com.example.hakju;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -132,10 +134,10 @@ public class menu extends AppCompatActivity {
             public void onClick(View view) {
                 writeMenu(studentId, productName, productNum, totalPrice);
 
-
-                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
-                intent.putExtra("StudentID", studentId);
-                startActivity(intent);
+                showDialog();
+//                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
+//                intent.putExtra("StudentID", studentId);
+//                startActivity(intent);
             }
         });
 
@@ -157,6 +159,29 @@ public class menu extends AppCompatActivity {
         MenuData menuData = new MenuData(productName, productNum, total);
 
         mRootRef.child("장바구니").child(studentId).push().setValue(menuData);
+    }
+
+    public void showDialog(){
+        final AlertDialog.Builder alert = new AlertDialog.Builder(menu.this);
+
+        alert.setTitle("장바구니");
+        alert.setMessage("장바구니로 이동하시겠습니까?");
+        alert.setPositiveButton("이동", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
+                intent.putExtra("StudentID", studentId);
+                startActivity(intent);
+            }
+        });
+        alert.setNegativeButton("안이동", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Toast.makeText(menu.this,"메뉴를 고르세요",Toast.LENGTH_SHORT).show();
+            }
+        });
+        alert.show();
     }
 }
 

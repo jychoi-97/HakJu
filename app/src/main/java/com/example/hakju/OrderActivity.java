@@ -57,6 +57,7 @@ public class  OrderActivity extends AppCompatActivity {
     TextView chong;
     Button allSelected;
     Button orderButton;
+    Button removeButton;
 
     //데이터베이스의 정보
     public DatabaseReference ref;
@@ -85,6 +86,10 @@ public class  OrderActivity extends AppCompatActivity {
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
         orderButton = (Button)findViewById(R.id.orderButton);
+        removeButton = (Button)findViewById(R.id.removeButton);
+
+        final ArrayList<String> copyList = new ArrayList<>();
+        final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, copyList);
 
         //파이어 베이스와 연결
         database = FirebaseDatabase.getInstance();
@@ -108,7 +113,7 @@ public class  OrderActivity extends AppCompatActivity {
                     Log.i("MenuName", name);
 //                           Log.i("MenuNumber", number);
 //                           Log.i("Total", total);
-                    midList.add(name + "  "+ number +"개      "+total+"원");
+                    midList.add(name + "  "+ number +" 개: "+total+" 원");
                     //어뎁터한테 데이터 넣어줬다고 알려줌 (안하면 화면에 안나온다)
                     adapter.notifyDataSetChanged();
                 }
@@ -190,6 +195,52 @@ public class  OrderActivity extends AppCompatActivity {
             }
         });
 
+        removeButton.setOnClickListener(new Button.OnClickListener(){
+
+            public void onClick(View v) {
+                int count = 0;
+                count = adapter.getCount();
+                for (int i = 0; i < count; i++) {
+                    if(listView.isItemChecked(i) == true)
+                       midList.remove(i);
+                    else
+                        copyList.add(midList.get(i));
+                }
+                listView.clearChoices() ;
+                adapter.notifyDataSetChanged();
+
+                count = 0;
+//                count = adapter2.getCount();
+                count = copyList.size();
+                ref.child(studentId).removeValue();
+
+                for(int i=0;i<count;i++){
+                    String str = copyList.get(i);
+                    StringTokenizer token = new StringTokenizer(str," ");
+
+//                    while(token.hasMoreTokens()){
+//                        name = token.nextToken();
+//                        number = Integer.parseInt(token.nextToken());
+//                        String nothing = token.nextToken();
+//                        total = Integer.parseInt(token.nextToken());
+//                        nothing = token.nextToken();
+//                    }
+
+                    String a[] = new String[token.countTokens()];
+                    int j =0;
+
+                    while(token.hasMoreTokens()){
+                        a[j] = token.nextToken();
+                        j++;
+                    }
+                    rewriteMenu(studentId,a[0],Integer.parseInt(a[1]),Integer.parseInt(a[3]));
+                    adapter2.notifyDataSetChanged();
+                }
+
+                }
+
+        });
+
 
     }
 
@@ -197,6 +248,11 @@ public class  OrderActivity extends AppCompatActivity {
         OrderItem orderItem = new OrderItem(foodName, foodNumber, foodMoney, isSelected);
 
         ref1.child(studentId).push().setValue(orderItem);
+    }
+    public void rewriteMenu(String studentId, String productName, int productNum, int total){
+        MenuData menuData = new MenuData(productName, productNum, total);
+
+        ref.child(studentId).push().setValue(menuData);
     }
 
     public void writeLala(String name){
