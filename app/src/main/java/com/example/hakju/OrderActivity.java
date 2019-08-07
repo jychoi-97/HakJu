@@ -52,83 +52,20 @@ import java.util.List;
 
 import static java.security.AccessController.getContext;
 
-//
 public class  OrderActivity extends AppCompatActivity {
-//    public ListAdapter adapter;
     public FirebaseDatabase database;
     TextView chong;
     Button allSelected;
     Button orderButton;
-
-//    public FirebaseListAdapter firebaseListAdapter;
-
 
     //데이터베이스의 정보
     public DatabaseReference ref;
     String studentId;
     public DatabaseReference ref1;
 
-    //정보 담을 객체
-//    public List<OrderItem> orderList = new ArrayList<>();
-
-    //화면에 뿌려줄 뷰
-//    public ListView listView;
-//    public class ListAdapter extends BaseAdapter{
-//        @Override
-//        public void notifyDataSetChanged() {
-//            super.notifyDataSetChanged();
-//        }
-//
-//        List<OrderItem> orderList;
-//        Context context;
-//        LayoutInflater inflater;
-//
-//        public ListAdapter(List<OrderItem> orderList, Context context){
-//            this.orderList = orderList;
-//            this.context = context;
-//            this.inflater = (LayoutInflater) context. getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return orderList.size();
-//        }
-//
-//        @Override
-//        public Object getItem(int position) {
-//            return orderList.get(position);
-//        }
-//
-//        @Override
-//        public long getItemId(int position) {
-//            return position;
-//        }
-//
-//        @Override
-//        public View getView(int i, View convertView, ViewGroup viewGroup) {
-//            if(convertView == null){
-//                convertView = inflater.inflate(R.layout.activity_order, null);
-//            }
-//
-//            TextView foodName = (TextView)convertView.findViewById(R.id.orderFoodName);
-//            TextView foodNumber = (TextView)convertView.findViewById(R.id.orderFoodNumber);
-//            TextView foodMoney = (TextView)convertView.findViewById(R.id.orderFoodMoney);
-//
-//            OrderItem orderItem = orderList.get(i);
-//            foodName.setText(orderItem.getFoodNumber());
-//            foodNumber.setText(orderItem.getFoodNumber());
-//            foodMoney.setText(orderItem.getFoodMoney());
-//
-//            return convertView;
-//        }
-//    }
-
-
-String name;
-int total;
-int number;
-
-
+    String name;
+    int total;
+    int number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,8 +86,6 @@ int number;
         listView.setAdapter(adapter);
         orderButton = (Button)findViewById(R.id.orderButton);
 
-
-
         //파이어 베이스와 연결
         database = FirebaseDatabase.getInstance();
         Log.i("start", "start");
@@ -158,12 +93,6 @@ int number;
         // 파이어 베이스에서 레퍼런스를 가져옴
         ref = database.getReference("장바구니");
         ref1 = database.getReference("결제");
-
-//        adapter = new ListAdapter(orderList, this);
-
-        // 파이어베이스 에서 데이터를 가져 옴
-
-
 
         ref.child(studentId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -191,6 +120,8 @@ int number;
             }
         });
 
+
+
         allSelected.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v){
                 int count = 0;
@@ -214,19 +145,23 @@ int number;
 
 
 
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-//                int countCount = 0;
-//                int totalTotal = 0;
-//                countCount = adapter.getCount();
-//                for (int i=0; i<countCount; i++){
-//                    if(listView.isItemChecked(i) == true){
-//                        totalTotal+=moneyList.get(i);
-//                    }
-//                }
-                chong.setText("dd");
+                int countCount = 0;
+                int totalTotal = 0;
+                countCount = adapter.getCount();
+                for (int i=0; i<countCount; i++){
+                    if(listView.isItemChecked(i) == true){
+                        totalTotal+=moneyList.get(i);
+                    }
+                }
+
+                String t = Integer.toString(totalTotal);
+                chong.setText(t);
             }
         });
 
