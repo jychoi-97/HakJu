@@ -205,6 +205,7 @@ public class  OrderActivity extends AppCompatActivity {
                        midList.remove(i);
                     else
                         copyList.add(midList.get(i));
+
                 }
                 listView.clearChoices() ;
                 adapter.notifyDataSetChanged();

@@ -147,7 +147,7 @@ public class menu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(), cart.class);
+                Intent intent = new Intent(getApplicationContext(), Payment.class);
                 startActivity(intent);
 
             }
