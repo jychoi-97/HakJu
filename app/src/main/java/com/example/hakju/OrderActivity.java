@@ -97,8 +97,7 @@ public class  OrderActivity extends AppCompatActivity {
         orderButton = (Button)findViewById(R.id.orderButton);
         removeButton = (Button)findViewById(R.id.removeButton);
 
-        final ArrayList<String> copyList = new ArrayList<>();
-        final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, copyList);
+//        final ArrayList<String> copyList = new ArrayList<>();
 
         //파이어 베이스와 연결
         database = FirebaseDatabase.getInstance();
@@ -107,6 +106,7 @@ public class  OrderActivity extends AppCompatActivity {
         // 파이어 베이스에서 레퍼런스를 가져옴
         ref = database.getReference("장바구니");
         ref1 = database.getReference("결제");
+
 
         ref.child(studentId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -134,8 +134,6 @@ public class  OrderActivity extends AppCompatActivity {
                 Log.w("OrderActivity", "loadPost:onCancelled", databaseError.toException());
             }
         });
-
-
 
 
 
@@ -216,49 +214,43 @@ public class  OrderActivity extends AppCompatActivity {
         });
 
         removeButton.setOnClickListener(new Button.OnClickListener(){
-
+            ArrayList<String> copyList = new ArrayList<>();
             public void onClick(View v) {
-                int count = 0;
-                count = adapter.getCount();
-                for (int i = 0; i < count; i++) {
-                    if(listView.isItemChecked(i) == true)
-                       midList.remove(i);
-                    else
-                        copyList.add(midList.get(i));
 
+                SparseBooleanArray sb = listView.getCheckedItemPositions();
+                if(sb.size() !=0){
+                    for(int i =listView.getCount()-1;i>=0;i--){
+                        if(sb.get(i)){
+                            midList.remove(i);
+                        }
+                        if(!sb.get(i)) {
+                            int k =0;
+                            copyList.add(k++,midList.get(i));
+                        }
+                    }
+                    listView.clearChoices();
+                    adapter.notifyDataSetChanged();
                 }
-                listView.clearChoices() ;
-                adapter.notifyDataSetChanged();
+                int count = adapter.getCount();
 
-                count = 0;
-//                count = adapter2.getCount();
-                count = copyList.size();
+
                 ref.child(studentId).removeValue();
 
-                for(int i=0;i<count;i++){
+                for(int i=0;i<count;i++) {
                     String str = copyList.get(i);
-                    StringTokenizer token = new StringTokenizer(str," ");
-
-//                    while(token.hasMoreTokens()){
-//                        name = token.nextToken();
-//                        number = Integer.parseInt(token.nextToken());
-//                        String nothing = token.nextToken();
-//                        total = Integer.parseInt(token.nextToken());
-//                        nothing = token.nextToken();
-//                    }
+                    StringTokenizer token = new StringTokenizer(str, " ");
 
                     String a[] = new String[token.countTokens()];
-                    int j =0;
+                    int j = 0;
 
-                    while(token.hasMoreTokens()){
+                    while (token.hasMoreTokens()) {
                         a[j] = token.nextToken();
                         j++;
                     }
-                    rewriteMenu(studentId,a[0],Integer.parseInt(a[1]),Integer.parseInt(a[3]));
-                    adapter2.notifyDataSetChanged();
+                    rewriteMenu(studentId, a[0], Integer.parseInt(a[1]), Integer.parseInt(a[3]));
                 }
+            }
 
-                }
 
         });
 
