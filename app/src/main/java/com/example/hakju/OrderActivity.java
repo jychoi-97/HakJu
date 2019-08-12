@@ -39,12 +39,16 @@ import com.example.hakju.OrderActivity;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 
 import java.util.ArrayList;
@@ -53,6 +57,7 @@ import java.util.List;
 import static java.security.AccessController.getContext;
 
 public class  OrderActivity extends AppCompatActivity {
+    private static final String TAG = "OrderActivity";
     public FirebaseDatabase database;
     TextView chong;
     Button allSelected;
@@ -183,15 +188,29 @@ public class  OrderActivity extends AppCompatActivity {
 
 
 
-
-
         orderButton.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v) {
+
+
+                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(!task.isSuccessful()){
+                            Log.w(TAG,"getInstanceId failed", task.getException());
+                            return;
+                        }
+                        String token = task.getResult().getToken();
+
+                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG,msg);
+//                    }
+//                });
 
                 int count = 0;
                 int totalTotal = 0;
                 count = adapter.getCount();
                 ref3=ref1.push();
+                ref1.child(ref3.getKey()).child(studentId).push().setValue(token);
 
                 for (int i = 0; i < count; i++) {
 
@@ -202,6 +221,7 @@ public class  OrderActivity extends AppCompatActivity {
                             ref1.child(ref3.getKey()).child(studentId).push().setValue(name);
 
 
+
                     }
 
                 }
@@ -210,7 +230,11 @@ public class  OrderActivity extends AppCompatActivity {
                 intent.putExtra("key", ref3.getKey());
 
                 startActivity(intent);
+                    }
+                });
             }
+
+
         });
 
         removeButton.setOnClickListener(new Button.OnClickListener(){
