@@ -45,6 +45,7 @@ public class menu extends AppCompatActivity {
     int total;
     int totalPrice;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,24 @@ public class menu extends AppCompatActivity {
         adapter.AddFragment(new FragmentFry(), "Fry & Rice");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         Intent intent = getIntent();
         studentId = intent.getExtras().getString("StudentID");
@@ -131,9 +150,18 @@ public class menu extends AppCompatActivity {
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                writeMenu(studentId, productName, productNum, totalPrice);
+                if(spinnerMenu1.getSelectedItem().toString().equalsIgnoreCase("선택하세요")&&menu1num.getValue()==0){
+                    Toast.makeText(menu.this, "메뉴와 개수를 선택하세요",Toast.LENGTH_SHORT).show();
+                }else if(menu1num.getValue()==0) {
+                    Toast.makeText(menu.this, "개수를 선택하세요",Toast.LENGTH_SHORT).show();
+                }else if (spinnerMenu1.getSelectedItem().toString().equalsIgnoreCase("선택하세요")){
+                    Toast.makeText(menu.this, "메뉴를 선택하세요",Toast.LENGTH_SHORT).show();
+                }else{
+                    writeMenu(studentId, productName, productNum, totalPrice);
+                    showDialog();
+                }
 
-                showDialog();
+
 //                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
 //                intent.putExtra("StudentID", studentId);
 //                startActivity(intent);
@@ -144,10 +172,16 @@ public class menu extends AppCompatActivity {
 
         btnOrder.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view) {if(spinnerMenu1.getSelectedItem().toString().equalsIgnoreCase("선택하세요")&&menu1num.getValue()==0){
+                Toast.makeText(menu.this, "메뉴와 개수를 선택하세요",Toast.LENGTH_SHORT).show();
+            }else if(menu1num.getValue()==0) {
+                Toast.makeText(menu.this, "개수를 선택하세요",Toast.LENGTH_SHORT).show();
+            }else if (spinnerMenu1.getSelectedItem().toString().equalsIgnoreCase("선택하세요")){
+                Toast.makeText(menu.this, "메뉴를 선택하세요",Toast.LENGTH_SHORT).show();
+            }else {
                 Intent intent = new Intent(getApplicationContext(), Payment.class);
                 startActivity(intent);
+            }
 
             }
         });
