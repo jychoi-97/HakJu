@@ -39,7 +39,7 @@ public class OrderCompletionActivity extends AppCompatActivity {
     public DatabaseReference ref7;
     final ArrayList<String> stringList = new ArrayList<>();
 
-//    int keyNumber = intent.getExtras().getInt("key");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,8 +137,8 @@ public class OrderCompletionActivity extends AppCompatActivity {
 
                 });
 
-                Intent goIntent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
-                startActivity(goIntent);
+                Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent2);
 
             }
     });

@@ -192,42 +192,36 @@ public class  OrderActivity extends AppCompatActivity {
                 } else {
 
 
+                    int count = 0;
+                    int totalTotal = 0;
+                    count = adapter.getCount();
+                    ref3 = ref1.push();
 
-                int count = 0;
-                int totalTotal = 0;
-                count = adapter.getCount();
-                ref3=ref1.push();
 
+                    for (int i = 0; i < count; i++) {
 
-                            for (int i = 0; i < count; i++) {
-
-                                if (listView.isItemChecked(i) == true) {
+                        if (listView.isItemChecked(i) == true) {
 
 
                             String name = midList.get(i);
                             ref1.child(ref3.getKey()).push().setValue(name);
-
+                        }
 
 
                     }
+                    Intent intent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+                    intent.putExtra("StudentID", studentId);
+                    intent.putExtra("key", ref3.getKey());
 
-                            }
-                            Intent intent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
-                            intent.putExtra("StudentID", studentId);
-                            intent.putExtra("key", ref3.getKey());
+                    startActivity(intent);
 
-                startActivity(intent);
                     }
 
 
-                            startActivity(intent);
+
                         }
                     });
-                }
-            }
 
-
-        });
 
         removeButton.setOnClickListener(new Button.OnClickListener() {
             ArrayList<String> copyList = new ArrayList<>();
