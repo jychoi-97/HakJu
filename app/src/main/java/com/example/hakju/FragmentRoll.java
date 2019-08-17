@@ -39,6 +39,9 @@ public class FragmentRoll extends Fragment {
         lstFood.add(new Food("야채김밥\n1500원", "Categorie Food", "Description Food", R.drawable.kimbap));
         lstFood.add(new Food("라면\n2300원", "Categorie Food", "Description Food", R.drawable.ramyeon));
         lstFood.add(new Food("불고기\n4800원", "Categorie Food", "Description Food", R.drawable.bulgogi));
+        lstFood.add(new Food("물냉면\n2800원", "Categorie Food", "Description Food", R.drawable.mulnang));
+        lstFood.add(new Food("돈육순두부찌개\n4000원", "Categorie Food", "Description Food", R.drawable.softtofu));
+        lstFood.add(new Food("돈까스쟁반국수\n4300원", "Categorie Food", "Description Food", R.drawable.donjang));
     }
 }
 
