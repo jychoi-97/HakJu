@@ -53,5 +53,8 @@ public class FragmentFry extends Fragment {
         lstFood.add(new Food("양념감자\n오므라이스\n3800원", "Categorie Food", "Description Food", R.drawable.potato));
         lstFood.add(new Food("타코야끼\n2500원", "Categorie Food", "Description Food", R.drawable.takoyaki));
         lstFood.add(new Food("돈까스카레동\n4200원", "Categorie Food", "Description Food", R.drawable.donkatsecurry));
+
+
     }
+
 }
