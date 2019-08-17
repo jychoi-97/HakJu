@@ -79,6 +79,7 @@ public class  OrderActivity extends AppCompatActivity {
     int waitingNumber;
 
     int chongCount = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,8 +100,8 @@ public class  OrderActivity extends AppCompatActivity {
 
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
-        orderButton = (Button)findViewById(R.id.orderButton);
-        removeButton = (Button)findViewById(R.id.removeButton);
+        orderButton = (Button) findViewById(R.id.orderButton);
+        removeButton = (Button) findViewById(R.id.removeButton);
 
 //        final ArrayList<String> copyList = new ArrayList<>();
 
@@ -128,12 +129,13 @@ public class  OrderActivity extends AppCompatActivity {
                     Log.i("MenuName", name);
 //                           Log.i("MenuNumber", number);
 //                           Log.i("Total", total);
-                    midList.add(name + "  "+ number +" 개: "+total+" 원");
+                    midList.add(name + "  " + number + " 개: " + total + " 원");
                     //어뎁터한테 데이터 넣어줬다고 알려줌 (안하면 화면에 안나온다)
                     adapter.notifyDataSetChanged();
                 }
 
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.w("OrderActivity", "loadPost:onCancelled", databaseError.toException());
@@ -141,31 +143,27 @@ public class  OrderActivity extends AppCompatActivity {
         });
 
 
-
-        allSelected.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View v){
+        allSelected.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
                 int count = 0;
+                int totalTotal = 0;
                 count = adapter.getCount();
-                for(int i=0; i<count;i++){
-                    listView.setItemChecked(i, true);
+                if (listView.getCheckedItemCount() == count) {
+                    for (int i = 0; i < count; i++) {
+                        listView.setItemChecked(i, false);
+                    }
+                    chong.setText(null);
+                } else {
+                    for (int i = 0; i < count; i++) {
+                        listView.setItemChecked(i, true);
+                        totalTotal += moneyList.get(i);
+                    }
+                    String t = Integer.toString(totalTotal);
+                    chong.setText(t);
                 }
 
             }
         });
-
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//                ref.child(studentId).d
-//
-//
-//
-//            }
-//        });
-
-
-
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -174,9 +172,9 @@ public class  OrderActivity extends AppCompatActivity {
                 int countCount = 0;
                 int totalTotal = 0;
                 countCount = adapter.getCount();
-                for (int i=0; i<countCount; i++){
-                    if(listView.isItemChecked(i) == true){
-                        totalTotal+=moneyList.get(i);
+                for (int i = 0; i < countCount; i++) {
+                    if (listView.isItemChecked(i) == true) {
+                        totalTotal += moneyList.get(i);
                     }
                 }
 
@@ -186,70 +184,71 @@ public class  OrderActivity extends AppCompatActivity {
         });
 
 
-
-
-        orderButton.setOnClickListener(new Button.OnClickListener(){
+        orderButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
+                if (listView.getCheckedItemCount() == 0) {
+                    Toast.makeText(OrderActivity.this, "메뉴를 선택해주세요", Toast.LENGTH_SHORT).show();
+                } else {
 
-                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if(!task.isSuccessful()){
-                            Log.w(TAG,"getInstanceId failed", task.getException());
-                            return;
-                        }
-                        String token = task.getResult().getToken();
 
-                        String msg = getString(R.string.msg_token_fmt, token);
-                        Log.d(TAG,msg);
+                    FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                            if (!task.isSuccessful()) {
+                                Log.w(TAG, "getInstanceId failed", task.getException());
+                                return;
+                            }
+                            String token = task.getResult().getToken();
+
+                            String msg = getString(R.string.msg_token_fmt, token);
+                            Log.d(TAG, msg);
 //                    }
 //                });
 
-                int count = 0;
-                int totalTotal = 0;
-                count = adapter.getCount();
-                ref3=ref1.push();
-                ref1.child(ref3.getKey()).child(studentId).push().setValue(token);
+                            int count = 0;
+                            int totalTotal = 0;
+                            count = adapter.getCount();
+                            ref3 = ref1.push();
+                            ref1.child(ref3.getKey()).child(studentId).push().setValue(token);
 
-                for (int i = 0; i < count; i++) {
+                            for (int i = 0; i < count; i++) {
 
-                    if(listView.isItemChecked(i) == true ){
-
-
-                            String name = midList.get(i);
-                            ref1.child(ref3.getKey()).child(studentId).push().setValue(name);
+                                if (listView.isItemChecked(i) == true) {
 
 
+                                    String name = midList.get(i);
+                                    ref1.child(ref3.getKey()).child(studentId).push().setValue(name);
+                                }
 
-                    }
+                            }
+                            Intent intent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+                            intent.putExtra("StudentID", studentId);
+                            intent.putExtra("key", ref3.getKey());
 
+                            startActivity(intent);
+                        }
+                    });
                 }
-                Intent intent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
-                intent.putExtra("StudentID", studentId);
-                intent.putExtra("key", ref3.getKey());
-
-                startActivity(intent);
-                    }
-                });
             }
 
 
         });
 
-        removeButton.setOnClickListener(new Button.OnClickListener(){
+        removeButton.setOnClickListener(new Button.OnClickListener() {
             ArrayList<String> copyList = new ArrayList<>();
+
             public void onClick(View v) {
 
                 SparseBooleanArray sb = listView.getCheckedItemPositions();
-                if(sb.size() !=0){
-                    for(int i =listView.getCount()-1;i>=0;i--){
-                        if(sb.get(i)){
+                if (sb.size() != 0) {
+                    for (int i = listView.getCount() - 1; i >= 0; i--) {
+                        if (sb.get(i)) {
                             midList.remove(i);
                         }
-                        if(!sb.get(i)) {
-                            int k =0;
-                            copyList.add(k++,midList.get(i));
+                        if (!sb.get(i)) {
+                            int k = 0;
+                            copyList.add(k++, midList.get(i));
                         }
                     }
                     listView.clearChoices();
@@ -260,7 +259,7 @@ public class  OrderActivity extends AppCompatActivity {
 
                 ref.child(studentId).removeValue();
 
-                for(int i=0;i<count;i++) {
+                for (int i = 0; i < count; i++) {
                     String str = copyList.get(i);
                     StringTokenizer token = new StringTokenizer(str, " ");
 
@@ -273,6 +272,8 @@ public class  OrderActivity extends AppCompatActivity {
                     }
                     rewriteMenu(studentId, a[0], Integer.parseInt(a[1]), Integer.parseInt(a[3]));
                 }
+
+                chong.setText(null);
             }
 
 
@@ -281,38 +282,19 @@ public class  OrderActivity extends AppCompatActivity {
 
     }
 
-    public void writeOrderItem(String foodName, int foodNumber, int foodMoney, boolean isSelected){
+    public void writeOrderItem(String foodName, int foodNumber, int foodMoney, boolean isSelected) {
         OrderItem orderItem = new OrderItem(foodName, foodNumber, foodMoney, isSelected);
 
         ref1.child(studentId).push().setValue(orderItem);
     }
-    public void rewriteMenu(String studentId, String productName, int productNum, int total){
+
+    public void rewriteMenu(String studentId, String productName, int productNum, int total) {
         MenuData menuData = new MenuData(productName, productNum, total);
 
         ref.child(studentId).push().setValue(menuData);
     }
-
-    public void writeLala(String name){
-        Lala lala = new Lala(name);
-
-        ref1.child(studentId).push().setValue(name);
-    }
 }
 
-class Lala {
-    String name;
 
-    public Lala(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-}
 
 

@@ -71,83 +71,34 @@
 
 
 
-    <TextView
-        android:id="@+id/text3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="16dp"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text1"
-        android:text="결제 방법" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintHorizontal_bias="0.086"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text3">
-
-        <RadioButton
-
-            android:id="@+id/rg_btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="휴대폰 결제" />
-
-        <RadioButton
-            android:layout_marginLeft="20dp"
-            android:id="@+id/rg_btn2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="신용카드" />
-
-        <RadioButton
-            android:layout_marginLeft="20dp"
-            android:id="@+id/rg_btn3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="카카오페이" />
-
-    </RadioGroup>
-
-
     <Button
         android:id="@+id/removeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
         android:text="삭제"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/allSelected"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/text2" />
 
     <Button
         android:id="@+id/allSelected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-
+        android:layout_marginTop="20dp"
         android:text="전체 선택"
         app:layout_constraintRight_toLeftOf="@+id/orderButton"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/text2" />
 
     <Button
         android:id="@+id/orderButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_marginTop="20dp"
         android:layout_marginRight="16dp"
         android:text="결제"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/text2" />
 
 </android.support.constraint.ConstraintLayout>
