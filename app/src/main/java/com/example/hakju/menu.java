@@ -35,7 +35,6 @@ public class menu extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
 
-    List<Food> lstFood;
 
     private DatabaseReference mRootRef;
 
@@ -60,11 +59,26 @@ public class menu extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(viewPager.getCurrentItem());
+                switch(tab.getPosition()){
+                    case 0:{
+                        tabLayout.getTabAt(0);
+                        break;}
+                    case 1:   {
+                        tabLayout.getTabAt(1);
+                        break;}
+                    case 2:{
+                        tabLayout.getTabAt(2);
+                        break;}
+
+                }
             }
 
             @Override
@@ -74,7 +88,8 @@ public class menu extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                if(tab.getPosition() != viewPager.getCurrentItem())
+                    viewPager.setCurrentItem(tab.getPosition());
             }
         });
 
@@ -216,6 +231,8 @@ public class menu extends AppCompatActivity {
         });
         alert.show();
     }
+
+
 }
 
 

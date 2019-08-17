@@ -41,9 +41,11 @@ public class Payment extends AppCompatActivity {
             //isp 인증 후 복귀했을 때 결제 후속조치
             String url = intentData.toString();
             if ( url.startsWith(APP_SCHEME) ) {
-                String redirectURL = url.substring(APP_SCHEME.length()+3);
+                    String redirectURL = url.substring(APP_SCHEME.length()+3);
                 mainWebView.loadUrl(redirectURL);
             }
+            Intent intent1 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+            startActivity(intent1);
         }
     }
 }
