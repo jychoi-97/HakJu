@@ -47,9 +47,9 @@ public class FragmentFry extends Fragment {
         super.onCreate(savedInstanceState);
 
         lstFood = new ArrayList<>();
-        lstFood.add(new Food("오므라이스\n2800원", "Categorie Food", "Description Food", R.drawable.omelett));
-        lstFood.add(new Food("등심돈까스\n3800원", "Categorie Food", "Description Food", R.drawable.donkatse));
-        lstFood.add(new Food("소떡소떡\n3000원", "Categorie Food", "Description Food", R.drawable.soddeok));
+        lstFood.add(new Food("오므라이스\n2800원", "Categorie Food", "Description Food", R.drawable.omelet));
+        lstFood.add(new Food("등심돈까스\n3800원", "Categorie Food", "Description Food", R.drawable.donkatsee));
+        lstFood.add(new Food("소떡소떡\n3000원", "Categorie Food", "Description Food", R.drawable.sodduk));
         lstFood.add(new Food("양념감자\n오므라이스\n3800원", "Categorie Food", "Description Food", R.drawable.potato));
         lstFood.add(new Food("타코야끼\n2500원", "Categorie Food", "Description Food", R.drawable.takoyaki));
         lstFood.add(new Food("돈까스카레동\n4200원", "Categorie Food", "Description Food", R.drawable.donkatsecurry));
