@@ -1,6 +1,7 @@
 package com.example.hakju;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,16 +14,21 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
 
 public class OrderCompletionActivity extends AppCompatActivity {
     Button completionButton;
+    private static final String TAG = "OrderCompletionActivity";
 
 
     public FirebaseDatabase database;
@@ -93,67 +99,49 @@ public class OrderCompletionActivity extends AppCompatActivity {
         });
 
         completionButton.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View v){
-
-                ref5=ref4.push();
-                ref7=ref6.push();
-                for (int i = 0; i < stringList.size(); i++) {
+            public void onClick(View v) {
 
 
+                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        String token = task.getResult().getToken();
+
+                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, msg);
+
+                        ref5 = ref4.push();
+                        ref7 = ref6.push();
+                        for (int i = 0; i < stringList.size(); i++) {
 
 
-                        String name = stringList.get(i);
-                        ref4.child(ref5.getKey()).child(studentId).push().setValue(name);
-                        ref6.child(ref7.getKey()).child(studentId).push().setValue(name);
+                            String name = stringList.get(i);
+                            ref4.child(ref5.getKey()).child(studentId).push().setValue(name);
+                            ref6.child(ref7.getKey()).child(studentId).push().setValue(name);
 
 
+                        }
+                        ref6.child(ref7.getKey()).child(studentId).child("주문번호").setValue(name.substring(name.length() - 6));
+                        ref6.child(ref7.getKey()).child(studentId).child("토큰값").setValue(token);
 
 
-
-                }
-                ref6.child(ref7.getKey()).child(studentId).child("주문번호").setValue(name.substring(name.length()-6));
-
-
-
-
-//                ref5=ref4.push();
-//                ref2.child(name).addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
 //
-//
-//
-//                        // 클래스 모델이 필요?
-//                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//
-//                            ref4.child(ref5.getKey()).push()=snapshot.getValue(String.class);
-////                            name = snapshot.child("productName").getValue(String.class);
-//                            //MyFiles filename = (MyFiles) fileSnapshot.getValue(MyFiles.class);
-//                            //하위키들의 value를 어떻게 가져오느냐???
-////                            String str = fileSnapshot.child("filename").getValue(String.class);
-////                            Log.i("TAG: value is ", str);
-////                            fileList.add(str);
-//                        }
-////                        adapter.notifyDataSetChanged();
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//                        Log.w("TAG: ", "Failed to read value", databaseError.toException());
-//                    }
-//                });
-//
-//
-//
-//
-//
-//
-                ref2.child(name).removeValue();
+                        ref2.child(name).removeValue();
+
+
+                    }
+
+                });
+
+                Intent goIntent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+                startActivity(goIntent);
+
             }
-        });
+    });
 
-
-
-
-    }
+}
 }
