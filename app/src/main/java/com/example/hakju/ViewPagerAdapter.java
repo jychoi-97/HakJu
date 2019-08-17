@@ -20,7 +20,22 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return lstFragment.get(position);
+        switch (position) {
+            case 0:
+                FragmentRoll tab1 = new FragmentRoll();
+                return tab1;
+            case 1:
+                FragmentBob tab2 = new FragmentBob();
+                return tab2;
+            case 2:
+                FragmentFry tab3 = new FragmentFry();
+                return tab3;
+            default:
+                return null;
+        }
+//
+//
+//        return lstFragment.get(position);
     }
 
     @Override

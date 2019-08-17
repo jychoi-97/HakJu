@@ -36,12 +36,9 @@ public class FragmentRoll extends Fragment {
         super.onCreate(savedInstanceState);
 
         lstFood = new ArrayList<>();
-        lstFood.add(new Food("돈까스\n1500원", "Categorie Food", "Description Food", R.drawable.donkatse));
-        lstFood.add(new Food("오믈렛", "Categorie Food", "Description Food", R.drawable.omelett));
-        lstFood.add(new Food("소떡소떡", "Categorie Food", "Description Food", R.drawable.soddeok));
-        lstFood.add(new Food("참치마요덮밥", "Categorie Food", "Description Food", R.drawable.tunamayo));
-        lstFood.add(new Food("소금구이덮밥", "Categorie Food", "Description Food", R.drawable.sogumgui));
-        lstFood.add(new Food("라면", "Categorie Food", "Description Food", R.drawable.ramyeon));
+        lstFood.add(new Food("야채김밥\n1500원", "Categorie Food", "Description Food", R.drawable.kimbap));
+        lstFood.add(new Food("라면\n2300원", "Categorie Food", "Description Food", R.drawable.ramyeon));
+        lstFood.add(new Food("불고기\n4800원", "Categorie Food", "Description Food", R.drawable.bulgogi));
     }
 }
 

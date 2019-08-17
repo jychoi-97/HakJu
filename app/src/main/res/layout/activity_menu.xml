@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,30 +9,28 @@
 
 
     <android.support.design.widget.TabLayout
-        
-
+        app:layout_constraintTop_toTopOf="@id/viewpager1"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
-        app:tabMode="scrollable"
-
+        android:background="@color/colorAccent"
+        app:tabMode="fixed"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/colorAccent"
+        app:tabIndicatorColor="@color/violet"
         android:id="@+id/tablayout1"
+        app:tabSelectedTextColor="@color/violet"
         />
 
     <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewpager1">
+        app:layout_constraintBottom_toBottomOf="@id/tablayout1">
 
     </android.support.v4.view.ViewPager>
 
 
-
-
-
     <SlidingDrawer
+        android:id="@+id/slide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:allowSingleTap="true"
@@ -41,19 +39,20 @@
         android:content="@+id/content"
         android:handle="@+id/handle"
         android:orientation="vertical"
-        android:id="@+id/slide"
-        android:topOffset="60dp">
+        android:topOffset="60dp"
+        app:layout_constraintBottom_toBottomOf="@id/viewpager1"
+        tools:layout_editor_absoluteX="16dp">
 
         <ImageView
+            android:id="@+id/handle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/handle"
-            android:src="@drawable/arrow_up"/>
+            android:src="@drawable/arrow_up" />
 
         <LinearLayout
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/content"
             android:background="#FFFFFF"
             android:orientation="vertical">
 
@@ -61,47 +60,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="메뉴 선택"/>
 
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinnerMenu1"
-                android:entries="@array/menu1"
-                android:layout_weight="1"></Spinner>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="수량"/>
-
-            <NumberPicker
-                android:id="@+id/menu1num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"></NumberPicker>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="메뉴 선택" />
+
+                <Spinner
+                    android:id="@+id/spinnerMenu1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/menu1"></Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="수량" />
+
+                <NumberPicker
+                    android:id="@+id/menu1num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></NumberPicker>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
                     android:id="@+id/btnCart"
-                    android:text="장바구니 담기"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="장바구니 담기" />
 
                 <Button
                     android:id="@+id/btnOrder"
@@ -112,11 +113,11 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tprice"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tprice"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </SlidingDrawer>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
