@@ -209,6 +209,7 @@ public class menu extends AppCompatActivity {
             }else if (spinnerMenu1.getSelectedItem().toString().equalsIgnoreCase("선택하세요")){
                 Toast.makeText(menu.this, "메뉴를 선택하세요",Toast.LENGTH_SHORT).show();
             }else {
+                mRootRef.child("결제").push().child(studentId).push().setValue(productName + "  " + productNum + "개 " + totalPrice + "원");
                 Intent intent = new Intent(getApplicationContext(), Payment.class);
                 startActivity(intent);
             }

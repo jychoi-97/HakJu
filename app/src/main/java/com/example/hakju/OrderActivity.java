@@ -129,7 +129,7 @@ public class  OrderActivity extends AppCompatActivity {
                     Log.i("MenuName", name);
 //                           Log.i("MenuNumber", number);
 //                           Log.i("Total", total);
-                    midList.add(name + "  " + number + " 개: " + total + " 원");
+                    midList.add(name + "  " + number + " 개   " + total + " 원");
                     //어뎁터한테 데이터 넣어줬다고 알려줌 (안하면 화면에 안나온다)
                     adapter.notifyDataSetChanged();
                 }
@@ -186,6 +186,7 @@ public class  OrderActivity extends AppCompatActivity {
 
         orderButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                ArrayList<String> copyList = new ArrayList<>();
 
                 if (listView.getCheckedItemCount() == 0) {
                     Toast.makeText(OrderActivity.this, "메뉴를 선택해주세요", Toast.LENGTH_SHORT).show();
@@ -218,6 +219,40 @@ public class  OrderActivity extends AppCompatActivity {
                     }
 
 
+                SparseBooleanArray sb = listView.getCheckedItemPositions();
+                if (sb.size() != 0) {
+                    for (int i = listView.getCount() - 1; i >= 0; i--) {
+                        if (sb.get(i)) {
+                            midList.remove(i);
+                        }
+                        if (!sb.get(i)) {
+                            int k = 0;
+                            copyList.add(k++, midList.get(i));
+                        }
+                    }
+                    listView.clearChoices();
+                    adapter.notifyDataSetChanged();
+                }
+                int count = adapter.getCount();
+
+
+                ref.child(studentId).removeValue();
+
+                for (int i = 0; i < count; i++) {
+                    String str = copyList.get(i);
+                    StringTokenizer token = new StringTokenizer(str, " ");
+
+                    String a[] = new String[token.countTokens()];
+                    int j = 0;
+
+                    while (token.hasMoreTokens()) {
+                        a[j] = token.nextToken();
+                        j++;
+                    }
+                    rewriteMenu(studentId, a[0], Integer.parseInt(a[1]), Integer.parseInt(a[3]));
+                }
+
+                chong.setText(null);
 
                         }
                     });

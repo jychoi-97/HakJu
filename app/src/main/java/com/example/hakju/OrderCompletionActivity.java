@@ -68,7 +68,7 @@ public class OrderCompletionActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 long count = dataSnapshot.getChildrenCount();
-                String s = String.valueOf(count-1);
+                String s = String.valueOf(count);
 
 
 
