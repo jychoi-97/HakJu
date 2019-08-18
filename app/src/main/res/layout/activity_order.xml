@@ -41,7 +41,7 @@
 
         android:id="@+id/listView"
         android:layout_width="380dp"
-        android:layout_height="400dp"
+        android:layout_height="370dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/customshape"
@@ -78,15 +78,14 @@
         tools:text="123원" />
 
 
-
     <Button
         android:id="@+id/removeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="삭제"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/allSelected"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text2" />
 
     <Button

@@ -39,6 +39,7 @@ public class menu extends AppCompatActivity {
 
 
     private DatabaseReference mRootRef;
+    public DatabaseReference key;
 
     String studentId;
     String productName;
@@ -232,8 +233,11 @@ public class menu extends AppCompatActivity {
             }else if (spinnerMenu1.getSelectedItem().toString().equalsIgnoreCase("선택하세요")){
                 Toast.makeText(menu.this, "메뉴를 선택하세요",Toast.LENGTH_SHORT).show();
             }else {
-                mRootRef.child("결제").push().child(studentId).push().setValue(productName + "  " + productNum + "개 " + totalPrice + "원");
-                Intent intent = new Intent(getApplicationContext(), Payment.class);
+                key = mRootRef.child("결제").push();
+                mRootRef.child("결제").child(key.getKey()).push().setValue(productName + "  " + productNum + "개 " + totalPrice + "원");
+                Intent intent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+                intent.putExtra("StudentID", studentId);
+                intent.putExtra("key", key.getKey());
                 startActivity(intent);
             }
 
