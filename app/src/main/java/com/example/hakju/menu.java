@@ -246,9 +246,6 @@ public class menu extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_menu:
-//                        Intent i = new Intent(getApplicationContext(), menu.class);
-//                        startActivity(i);
-//                        return true;
                         break;
                     case R.id.action_cart:
                         Intent i1 = new Intent(getApplicationContext(), OrderActivity.class);
@@ -259,7 +256,8 @@ public class menu extends AppCompatActivity {
                     case R.id.action_paid:
                         Intent i2 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
                         startActivity(i2);
-//                        return true;
+                        i2.putExtra("StudentID", studentId);
+
                         break;
                 }
                 return false;

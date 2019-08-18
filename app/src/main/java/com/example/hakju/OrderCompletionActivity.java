@@ -2,9 +2,11 @@ package com.example.hakju;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -143,5 +145,28 @@ public class OrderCompletionActivity extends AppCompatActivity {
             }
     });
 
-}
+        BottomNavigationView bottom = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.action_menu:
+                        Intent i = new Intent(getApplicationContext(), menu.class);
+                        i.putExtra("StudentID", studentId);
+                        startActivity(i);
+                        break;
+                    case R.id.action_cart:
+                        Intent i1 = new Intent(getApplicationContext(), OrderActivity.class);
+                        i1.putExtra("StudentID", studentId);
+                        startActivity(i1);
+                        break;
+                    case R.id.action_paid:
+                        break;
+                }
+                return false;
+            }
+        });
+
+
+    }
 }
