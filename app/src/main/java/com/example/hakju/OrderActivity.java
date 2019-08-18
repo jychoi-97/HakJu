@@ -161,7 +161,7 @@ public class  OrderActivity extends AppCompatActivity {
                         totalTotal += moneyList.get(i);
                     }
                     String t = Integer.toString(totalTotal);
-                    chong.setText(t);
+                    chong.setText(t+"원");
                 }
 
             }
@@ -181,7 +181,7 @@ public class  OrderActivity extends AppCompatActivity {
                 }
 
                 String t = Integer.toString(totalTotal);
-                chong.setText(t);
+                chong.setText(t+"원");
             }
         });
 
@@ -192,8 +192,6 @@ public class  OrderActivity extends AppCompatActivity {
                 if (listView.getCheckedItemCount() == 0) {
                     Toast.makeText(OrderActivity.this, "메뉴를 선택해주세요", Toast.LENGTH_SHORT).show();
                 } else {
-
-
                     FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                         @Override
                         public void onComplete(@NonNull Task<InstanceIdResult> task) {
@@ -205,8 +203,6 @@ public class  OrderActivity extends AppCompatActivity {
 
                             String msg = getString(R.string.msg_token_fmt, token);
                             Log.d(TAG, msg);
-//                    }
-//                });
 
                             int count = 0;
                             int totalTotal = 0;
@@ -217,14 +213,11 @@ public class  OrderActivity extends AppCompatActivity {
                             for (int i = 0; i < count; i++) {
 
                                 if (listView.isItemChecked(i) == true) {
-
-
                                     String name = midList.get(i);
                                     ref1.child(ref3.getKey()).child(studentId).push().setValue(name);
                                 }
-
                             }
-                            Intent intent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), Payment.class);
                             intent.putExtra("StudentID", studentId);
                             intent.putExtra("key", ref3.getKey());
 
@@ -297,6 +290,7 @@ public class  OrderActivity extends AppCompatActivity {
                     case R.id.action_paid:
                         Intent i2 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
                         i2.putExtra("StudentID", studentId);
+                        i2.putExtra("key", ref3.getKey());
                         startActivity(i2);
                         break;
                 }

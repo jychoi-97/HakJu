@@ -72,8 +72,6 @@ public class OrderCompletionActivity extends AppCompatActivity {
                 long count = dataSnapshot.getChildrenCount();
                 String s = String.valueOf(count-1);
 
-
-
                 waitingNumber.setText(s);
             }
             @Override
@@ -119,21 +117,14 @@ public class OrderCompletionActivity extends AppCompatActivity {
                         ref5 = ref4.push();
                         ref7 = ref6.push();
                         for (int i = 0; i < stringList.size(); i++) {
-
-
                             String name = stringList.get(i);
                             ref4.child(ref5.getKey()).child(studentId).push().setValue(name);
                             ref6.child(ref7.getKey()).child(studentId).push().setValue(name);
-
-
                         }
                         ref6.child(ref7.getKey()).child(studentId).child("주문번호").setValue(name.substring(name.length() - 6));
                         ref6.child(ref7.getKey()).child(studentId).child("토큰값").setValue(token);
 
-
-//
                         ref2.child(name).removeValue();
-
 
                     }
 

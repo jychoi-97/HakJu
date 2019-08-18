@@ -58,24 +58,25 @@ public class Payment extends AppCompatActivity {
 //            Intent intent1 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
 //            startActivity(intent1);
 
-            String url = intentData.toString();
+            final String url = intentData.toString();
 
             if ( url.startsWith(APP_SCHEME) ) {
                 String redirectURL = url.substring(APP_SCHEME.length()+3);
                 mainWebView.loadUrl(redirectURL);
 //                finish();
 
-//                Handler hand = new Handler();
-//
-//                hand.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        finish();
-//                        Intent i = new Intent(Payment.this, OrderCompletionActivity.class);
-//                        startActivity(i);
-//
-//                    }
-//                }, 2000);
+                Handler hand = new Handler();
+
+                hand.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+
+                        Intent i = new Intent(Payment.this, OrderCompletionActivity.class);
+                        startActivity(i);
+
+                    }
+                }, 20);
 
             }
 
