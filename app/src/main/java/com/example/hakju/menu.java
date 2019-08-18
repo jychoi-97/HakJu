@@ -3,11 +3,13 @@ package com.example.hakju;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.ValueCallback;
 import android.widget.AdapterView;
@@ -234,6 +236,32 @@ public class menu extends AppCompatActivity {
                 startActivity(intent);
             }
 
+            }
+        });
+
+
+        BottomNavigationView bottom = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.action_menu:
+//                        Intent i = new Intent(getApplicationContext(), menu.class);
+//                        startActivity(i);
+//                        return true;
+                        break;
+                    case R.id.action_cart:
+                        Intent i1 = new Intent(getApplicationContext(), OrderActivity.class);
+                        startActivity(i1);
+//                        return true;
+                        break;
+                    case R.id.action_paid:
+                        Intent i2 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+                        startActivity(i2);
+//                        return true;
+                        break;
+                }
+                return false;
             }
         });
 
