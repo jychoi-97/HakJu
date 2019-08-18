@@ -11,6 +11,15 @@
         <item>오므라이스</item>
         <item>등심돈까스</item>
         <item>소떡소떡</item>
+        <item>물냉면</item>
+        <item>돈육순두부찌개</item>
+        <item>돈까스 쟁반국수</item>
+        <item>간장돼불덮밥</item>
+        <item>삼겹살강된장 비빔밥</item>
+        <item>새우튀김알밥</item>
+        <item>양념감자 오므라이스</item>
+        <item>타코야끼</item>
+        <item>돈까스카레동</item>
     </string-array>
 
     <integer-array name="price">
@@ -23,6 +32,15 @@
         <item>2800</item>
         <item>3800</item>
         <item>3000</item>
+        <item>2800</item>
+        <item>4000</item>
+        <item>4300</item>
+        <item>3800</item>
+        <item>4000</item>
+        <item>4000</item>
+        <item>3800</item>
+        <item>2500</item>
+        <item>4200</item>
     </integer-array>
 
 </resources>

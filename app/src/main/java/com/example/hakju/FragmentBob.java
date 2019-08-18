@@ -41,6 +41,9 @@ public class FragmentBob extends Fragment {
         lstFood.add(new Food("소금구이덮밥\n3500원", "Categorie Food", "Description Food", R.drawable.sogumgui));
         lstFood.add(new Food("육회비빔밥\n4500원", "Categorie Food", "Description Food", R.drawable.bibimbab));
         lstFood.add(new Food("참치마요\n3500원", "Categorie Food", "Description Food", R.drawable.tunamayo));
+        lstFood.add(new Food("새우튀김알밥\n4000원", "Categorie Food", "Description Food", R.drawable.fryshrimp));
+        lstFood.add(new Food("삼겹살강된장\n비빔밥\n4000원", "Categorie Food", "Description Food", R.drawable.porkbelly));
+        lstFood.add(new Food("간장돼불덮밥\n3800원", "Categorie Food", "Description Food", R.drawable.soypork));
 
     }
 }

@@ -222,7 +222,7 @@ public class  OrderActivity extends AppCompatActivity {
                                 }
 
                             }
-                            Intent intent = new Intent(getApplicationContext(), Payment.class);
+                            Intent intent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
                             intent.putExtra("StudentID", studentId);
                             intent.putExtra("key", ref3.getKey());
 
