@@ -188,46 +188,75 @@ public class  OrderActivity extends AppCompatActivity {
 
         orderButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                ArrayList<String> copyList = new ArrayList<>();
 
                 if (listView.getCheckedItemCount() == 0) {
                     Toast.makeText(OrderActivity.this, "메뉴를 선택해주세요", Toast.LENGTH_SHORT).show();
                 } else {
-                    FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                            if (!task.isSuccessful()) {
-                                Log.w(TAG, "getInstanceId failed", task.getException());
-                                return;
-                            }
-                            String token = task.getResult().getToken();
 
-                            String msg = getString(R.string.msg_token_fmt, token);
-                            Log.d(TAG, msg);
 
-                            int count = 0;
-                            int totalTotal = 0;
-                            count = adapter.getCount();
-                            ref3 = ref1.push();
-                            ref1.child(ref3.getKey()).child(studentId).push().setValue(token);
+                    int count = 0;
+                    int totalTotal = 0;
+                    count = adapter.getCount();
+                    ref3 = ref1.push();
 
-                            for (int i = 0; i < count; i++) {
 
-                                if (listView.isItemChecked(i) == true) {
-                                    String name = midList.get(i);
-                                    ref1.child(ref3.getKey()).child(studentId).push().setValue(name);
-                                }
-                            }
-                            Intent intent = new Intent(getApplicationContext(), Payment.class);
-                            intent.putExtra("StudentID", studentId);
-                            intent.putExtra("key", ref3.getKey());
+                    for (int i = 0; i < count; i++) {
 
-                            startActivity(intent);
+                        if (listView.isItemChecked(i) == true) {
+
+
+                            String name = midList.get(i);
+                            ref1.child(ref3.getKey()).push().setValue(name);
                         }
-                    });
+
+
+                    }
+                    Intent intent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+                    intent.putExtra("StudentID", studentId);
+                    intent.putExtra("key", ref3.getKey());
+
+                    startActivity(intent);
+
                 }
+
+
+                SparseBooleanArray sb = listView.getCheckedItemPositions();
+                if (sb.size() != 0) {
+                    for (int i = listView.getCount() - 1; i >= 0; i--) {
+                        if (sb.get(i)) {
+                            midList.remove(i);
+                        }
+                        if (!sb.get(i)) {
+                            int k = 0;
+                            copyList.add(k++, midList.get(i));
+                        }
+                    }
+                    listView.clearChoices();
+                    adapter.notifyDataSetChanged();
+                }
+                int count = adapter.getCount();
+
+
+                ref.child(studentId).removeValue();
+
+                for (int i = 0; i < count; i++) {
+                    String str = copyList.get(i);
+                    StringTokenizer token = new StringTokenizer(str, " ");
+
+                    String a[] = new String[token.countTokens()];
+                    int j = 0;
+
+                    while (token.hasMoreTokens()) {
+                        a[j] = token.nextToken();
+                        j++;
+                    }
+                    rewriteMenu(studentId, a[0], Integer.parseInt(a[1]), Integer.parseInt(a[3]));
+                }
+
+                chong.setText(null);
+
             }
-
-
         });
 
         removeButton.setOnClickListener(new Button.OnClickListener() {
