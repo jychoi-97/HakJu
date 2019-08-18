@@ -3,11 +3,13 @@ package com.example.hakju;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.ValueCallback;
 import android.widget.AdapterView;
@@ -35,7 +37,6 @@ public class menu extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
 
-    List<Food> lstFood;
 
     private DatabaseReference mRootRef;
 
@@ -60,11 +61,26 @@ public class menu extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(viewPager.getCurrentItem());
+                switch(tab.getPosition()){
+                    case 0:{
+                        tabLayout.getTabAt(0);
+                        break;}
+                    case 1:   {
+                        tabLayout.getTabAt(1);
+                        break;}
+                    case 2:{
+                        tabLayout.getTabAt(2);
+                        break;}
+
+                }
             }
 
             @Override
@@ -74,7 +90,8 @@ public class menu extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                if(tab.getPosition() != viewPager.getCurrentItem())
+                    viewPager.setCurrentItem(tab.getPosition());
             }
         });
 
@@ -148,6 +165,12 @@ public class menu extends AppCompatActivity {
                 else if (position == 19)
                     total = arrayTotal[18];
 
+
+
+                totalPrice = productNum * total;
+
+                TextView tprice = (TextView)findViewById(R.id.tprice);
+                tprice.setText("총 금액: " + totalPrice + "원");
             }
 
             @Override
@@ -217,6 +240,31 @@ public class menu extends AppCompatActivity {
             }
         });
 
+
+        BottomNavigationView bottom = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.action_menu:
+                        break;
+                    case R.id.action_cart:
+                        Intent i1 = new Intent(getApplicationContext(), OrderActivity.class);
+                        i1.putExtra("StudentID", studentId);
+                        startActivity(i1);
+//                        return true;
+                        break;
+                    case R.id.action_paid:
+                        Intent i2 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+                        startActivity(i2);
+                        i2.putExtra("StudentID", studentId);
+
+                        break;
+                }
+                return false;
+            }
+        });
+
     }
 
     private void writeMenu(String studentId, String productName, int productNum, int total){
@@ -238,7 +286,7 @@ public class menu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        alert.setNegativeButton("안이동", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton("이동안함", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -247,6 +295,8 @@ public class menu extends AppCompatActivity {
         });
         alert.show();
     }
+
+
 }
 
 

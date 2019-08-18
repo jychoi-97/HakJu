@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -159,7 +161,7 @@ public class  OrderActivity extends AppCompatActivity {
                         totalTotal += moneyList.get(i);
                     }
                     String t = Integer.toString(totalTotal);
-                    chong.setText(t);
+                    chong.setText(t+"원");
                 }
 
             }
@@ -179,7 +181,7 @@ public class  OrderActivity extends AppCompatActivity {
                 }
 
                 String t = Integer.toString(totalTotal);
-                chong.setText(t);
+                chong.setText(t+"원");
             }
         });
 
@@ -216,7 +218,7 @@ public class  OrderActivity extends AppCompatActivity {
 
                     startActivity(intent);
 
-                    }
+                }
 
 
                 SparseBooleanArray sb = listView.getCheckedItemPositions();
@@ -303,6 +305,31 @@ public class  OrderActivity extends AppCompatActivity {
         });
 
 
+        BottomNavigationView bottom = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.action_menu:
+                        Intent i = new Intent(getApplicationContext(), menu.class);
+                        i.putExtra("StudentID", studentId);
+                        startActivity(i);
+                        break;
+                    case R.id.action_cart:
+                        break;
+                    case R.id.action_paid:
+                        Intent i2 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+                        i2.putExtra("StudentID", studentId);
+                        i2.putExtra("key", ref3.getKey());
+                        startActivity(i2);
+                        break;
+                }
+                return false;
+            }
+        });
+
+
+
     }
 
     public void writeOrderItem(String foodName, int foodNumber, int foodMoney, boolean isSelected) {
@@ -316,6 +343,8 @@ public class  OrderActivity extends AppCompatActivity {
 
         ref.child(studentId).push().setValue(menuData);
     }
+
+
 }
 
 
