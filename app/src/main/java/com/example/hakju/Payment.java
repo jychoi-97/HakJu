@@ -7,9 +7,11 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,6 +20,7 @@ public class Payment extends AppCompatActivity {
 
     private WebView mainWebView;
     private static final String APP_SCHEME = "imp84763920";
+    Button goBack;
 
     @SuppressLint("NewApi")@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,51 +41,37 @@ public class Payment extends AppCompatActivity {
 
         Intent intent = getIntent();
         Uri intentData = intent.getData();
+        goBack = (Button)findViewById(R.id.goBack);
 
         if ( intentData == null ) {
             mainWebView.loadUrl("https://www.iamport.kr/demo");
         } else {
             //isp 인증 후 복귀했을 때 결제 후속조치
 
-//            Handler hand = new Handler();
-//
-//            hand.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Intent i = new Intent(Payment.this, OrderCompletionActivity.class);
-//                    startActivity(i);
-//                    finish();
-//                }
-//            }, 2000);
-
-//            Intent intent1 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
-//            startActivity(intent1);
-
             final String url = intentData.toString();
 
             if ( url.startsWith(APP_SCHEME) ) {
                 String redirectURL = url.substring(APP_SCHEME.length()+3);
                 mainWebView.loadUrl(redirectURL);
-//                finish();
-
-                Handler hand = new Handler();
-
-                hand.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-
-                        Intent i = new Intent(Payment.this, OrderCompletionActivity.class);
-                        startActivity(i);
-
-                    }
-                }, 20);
-
             }
+
+            goBack.setVisibility(View.VISIBLE);
 
 
         }
 
+        Intent i = getIntent();
+        final String studentId = i.getExtras().getString("StudentID");
+
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a = new Intent(Payment.this, OrderCompletionActivity.class);
+                a.putExtra("StudentID", studentId);
+//                a.putExtra("key", key.getKey());
+                startActivity(a);
+            }
+        });
 
     }
 }

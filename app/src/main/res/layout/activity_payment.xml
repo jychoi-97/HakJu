@@ -6,12 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".Payment">
 
+    <Button
+        android:id="@+id/goBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="결제 후 주문번호 확인"
+
+        app:layout_constraintBottom_toTopOf="@+id/mainWebView"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
     <WebView
+        android:id="@+id/mainWebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mainWebView"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goBack">
 
     </WebView>
+
 
 </android.support.constraint.ConstraintLayout>

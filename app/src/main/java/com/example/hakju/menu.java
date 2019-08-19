@@ -235,7 +235,7 @@ public class menu extends AppCompatActivity {
             }else {
                 key = mRootRef.child("결제").push();
                 mRootRef.child("결제").child(key.getKey()).push().setValue(productName + "  " + productNum + "개 " + totalPrice + "원");
-                Intent intent = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+                Intent intent = new Intent(getApplicationContext(), Payment.class);
                 intent.putExtra("StudentID", studentId);
                 intent.putExtra("key", key.getKey());
                 startActivity(intent);
