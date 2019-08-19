@@ -144,6 +144,7 @@ public class OrderCompletionActivity extends AppCompatActivity {
                     case R.id.action_menu:
                         Intent i = new Intent(getApplicationContext(), menu.class);
                         i.putExtra("StudentID", studentId);
+                        i.putExtra("key", name);
                         startActivity(i);
                         break;
                     case R.id.action_cart:
