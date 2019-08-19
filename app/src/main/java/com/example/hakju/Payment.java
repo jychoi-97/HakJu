@@ -13,6 +13,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
