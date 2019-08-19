@@ -259,9 +259,10 @@ public class menu extends AppCompatActivity {
                         break;
                     case R.id.action_paid:
                         Intent i2 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
-                        startActivity(i2);
                         i2.putExtra("StudentID", studentId);
                         i2.putExtra("key", key.getKey());
+                        startActivity(i2);
+
                         break;
                 }
                 return false;
