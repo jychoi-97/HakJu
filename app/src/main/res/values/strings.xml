@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HakJu</string>
+    <string name="app_name">학식주문이</string>
     <string name="name">name:</string>
     <string name="price">price:</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
