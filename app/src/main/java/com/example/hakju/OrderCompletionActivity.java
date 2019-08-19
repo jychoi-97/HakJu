@@ -130,7 +130,7 @@ public class OrderCompletionActivity extends AppCompatActivity {
 
                 });
 
-                Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent2 = new Intent(getApplicationContext(), menu.class);
                 startActivity(intent2);
 
             }
@@ -147,7 +147,7 @@ public class OrderCompletionActivity extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case R.id.action_cart:
-                        Intent i1 = new Intent(getApplicationContext(), OrderActivity.class);
+                        Intent i1 = new Intent(getApplicationContext(), MainActivity.class);
                         i1.putExtra("StudentID", studentId);
                         startActivity(i1);
                         break;
