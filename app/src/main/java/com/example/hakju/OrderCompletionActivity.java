@@ -147,11 +147,15 @@ public class OrderCompletionActivity extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case R.id.action_cart:
-                        Intent i1 = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent i1 = new Intent(getApplicationContext(), OrderActivity.class);
                         i1.putExtra("StudentID", studentId);
                         startActivity(i1);
                         break;
                     case R.id.action_paid:
+//                        Intent i2 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+//                        i2.putExtra("StudentID", studentId);
+//                        i2.putExtra("key", name);
+//                        startActivity(i2);
                         break;
                 }
                 return false;
