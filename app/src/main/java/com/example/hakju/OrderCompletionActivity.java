@@ -130,7 +130,7 @@ public class OrderCompletionActivity extends AppCompatActivity {
 
                 });
 
-                Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent2 = new Intent(getApplicationContext(), menu.class);
                 startActivity(intent2);
 
             }
@@ -153,6 +153,10 @@ public class OrderCompletionActivity extends AppCompatActivity {
                         startActivity(i1);
                         break;
                     case R.id.action_paid:
+//                        Intent i2 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
+//                        i2.putExtra("StudentID", studentId);
+//                        i2.putExtra("key", name);
+//                        startActivity(i2);
                         break;
                 }
                 return false;
