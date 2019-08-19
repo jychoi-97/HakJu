@@ -40,7 +40,7 @@
 
 
         android:id="@+id/listView"
-        android:layout_width="380dp"
+        android:layout_width="360dp"
         android:layout_height="370dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"

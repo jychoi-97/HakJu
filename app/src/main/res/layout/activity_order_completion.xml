@@ -72,6 +72,22 @@
         app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
     <TextView
+        android:id="@+id/text"
+
+        android:layout_width="wrap_content"
+
+
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="332dp"
+        android:text="결제가 완료되었습니다."
+        android:textColor="#99979393"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/myNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

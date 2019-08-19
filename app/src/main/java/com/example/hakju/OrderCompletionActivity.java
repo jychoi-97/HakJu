@@ -130,7 +130,7 @@ public class OrderCompletionActivity extends AppCompatActivity {
 
                 });
 
-                Intent intent2 = new Intent(getApplicationContext(), menu.class);
+                Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent2);
 
             }
