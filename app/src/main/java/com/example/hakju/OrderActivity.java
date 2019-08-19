@@ -75,6 +75,7 @@ public class  OrderActivity extends AppCompatActivity {
     DatabaseReference ref3;
 
 
+    String orderKey="";
     String name;
     int total;
     int number;
@@ -199,6 +200,7 @@ public class  OrderActivity extends AppCompatActivity {
                     int totalTotal = 0;
                     count = adapter.getCount();
                     ref3 = ref1.push();
+                    orderKey=ref3.getKey();
 
 
                     for (int i = 0; i < count; i++) {
@@ -207,14 +209,14 @@ public class  OrderActivity extends AppCompatActivity {
 
 
                             String name = midList.get(i);
-                            ref1.child(ref3.getKey()).push().setValue(name);
+                            ref1.child(orderKey).push().setValue(name);
                         }
 
 
                     }
                     Intent intent = new Intent(getApplicationContext(), Payment.class);
                     intent.putExtra("StudentID", studentId);
-                    intent.putExtra("key", ref3.getKey());
+                    intent.putExtra("key", orderKey);
 
                     startActivity(intent);
 
@@ -320,7 +322,7 @@ public class  OrderActivity extends AppCompatActivity {
                     case R.id.action_paid:
                         Intent i2 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
                         i2.putExtra("StudentID", studentId);
-                        i2.putExtra("key", ref3.getKey());
+                        i2.putExtra("key", orderKey);
                         startActivity(i2);
                         break;
                 }
