@@ -256,7 +256,6 @@ public class menu extends AppCompatActivity {
                         Intent i1 = new Intent(getApplicationContext(), OrderActivity.class);
                         i1.putExtra("StudentID", studentId);
                         startActivity(i1);
-//                        return true;
                         break;
                     case R.id.action_paid:
                         Intent i2 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
