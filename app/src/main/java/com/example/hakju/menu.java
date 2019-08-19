@@ -262,7 +262,7 @@ public class menu extends AppCompatActivity {
                         Intent i2 = new Intent(getApplicationContext(), OrderCompletionActivity.class);
                         startActivity(i2);
                         i2.putExtra("StudentID", studentId);
-
+                        i2.putExtra("key", key.getKey());
                         break;
                 }
                 return false;

@@ -62,13 +62,14 @@ public class Payment extends AppCompatActivity {
 
         Intent i = getIntent();
         final String studentId = i.getExtras().getString("StudentID");
+        final String key = i.getExtras().getString("key");
 
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent a = new Intent(Payment.this, OrderCompletionActivity.class);
                 a.putExtra("StudentID", studentId);
-//                a.putExtra("key", key.getKey());
+                a.putExtra("key", key);
                 startActivity(a);
             }
         });
