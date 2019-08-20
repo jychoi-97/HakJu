@@ -34,7 +34,6 @@
         </activity>
         <activity android:name=".OrderCompletionActivity" />
         <activity android:name=".OrderActivity" />
-        <activity android:name=".cart" />
         <activity android:name=".menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
